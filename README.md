@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# this-is-pepe – Personal Portfolio
 
-## Getting Started
+This is the source code of my personal website and portfolio, built with **Next.js**, **TypeScript**, and **Tailwind CSS**.  
+It showcases my professional experience, skills, and contact information as a Full Stack Developer.
 
-First, run the development server:
+---
+
+## 🧑‍💻 About Me
+
+I'm Lucas "Pepe" Regalado, a software developer based in Montevideo, Uruguay. I specialize in **React**, **Node.js**, and **MongoDB** and have experience leading backend teams and building scalable solutions for international clients.
+
+You can check out my experience, skills, and get in touch through the site.
+
+---
+
+## 🛠 Tech Stack
+
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+---
+
+## 🚀 Getting Started
+
+To run this project locally:
 
 ```bash
+git clone https://github.com/LRegalado1996/this-is-pepe.git
+cd this-is-pepe
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Contact
 
-## Learn More
+- Email: [lucasregalado@hotmail.com](mailto:lucasregalado@hotmail.com)
+- LinkedIn: [linkedin.com/in/lucas-regalado](https://www.linkedin.com/in/lucas-regalado)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
