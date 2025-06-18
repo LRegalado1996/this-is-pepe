@@ -1,2 +1,2 @@
-export * from "./common/subtitle";
-export * from "./common/title";
+export * from "./ui/subtitle";
+export * from "./ui/title";
