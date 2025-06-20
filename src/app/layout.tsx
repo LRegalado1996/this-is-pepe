@@ -26,7 +26,7 @@ export default function RootLayout({
         {/* <Header /> */}
 
         {/* max-w-[1280px] */}
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 w-full">{children}</main>
         {/* <Footer /> */}
       </body>
     </html>
