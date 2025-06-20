@@ -27,7 +27,7 @@ export default function RootLayout({
         <Header />
 
         {/* max-w-[1280px] */}
-        <main className="flex-1 w-full">{children}</main>
+        <main className="flex-1 w-full flex flex-col items-center">{children}</main>
         {/* <Footer /> */}
       </body>
     </html>
