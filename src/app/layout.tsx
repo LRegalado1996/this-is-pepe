@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
+import { Header } from "@/components";
 
 import "./globals.css";
 
@@ -23,7 +24,7 @@ export default function RootLayout({
       <body
         className={`${textFont.className} antialiased flex flex-col items-center justify-center min-w-svw min-h-dvh bg-light-primary`}
       >
-        {/* <Header /> */}
+        <Header />
 
         {/* max-w-[1280px] */}
         <main className="flex-1 w-full">{children}</main>
