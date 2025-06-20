@@ -3,16 +3,16 @@ import { Lora } from "next/font/google";
 const titleFont = Lora();
 
 interface Props {
-  name: string;
+  children: React.ReactNode;
   className?: string;
 }
 
-export const Title = ({ name, className }: Props) => {
+export const Title = ({ children, className }: Props) => {
   return (
     <h1
       className={`${titleFont.className} antialiased text-4xl font-bold text-secondary ${className}`}
     >
-      {name}
+      {children}
     </h1>
   );
 };
