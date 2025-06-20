@@ -24,7 +24,9 @@ export default function RootLayout({
         className={`${textFont.className} antialiased flex flex-col items-center justify-center min-w-svw min-h-dvh bg-light-primary`}
       >
         {/* <Header /> */}
-        <main className="max-w-[1280px] p-4 flex-1">{children}</main>
+
+        {/* max-w-[1280px] */}
+        <main className="flex-1">{children}</main>
         {/* <Footer /> */}
       </body>
     </html>
