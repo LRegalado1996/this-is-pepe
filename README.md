@@ -18,6 +18,7 @@ You can check out my experience, skills, and get in touch through the site.
 - [Next.js](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Lucide Icons](https://lucide.dev/)
 
 ---
 
