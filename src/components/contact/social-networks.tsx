@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 
-import { Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
+import { Instagram, Linkedin, Mail, MessageCircle, X } from "lucide-react";
 import { Subtitle } from "../ui/subtitle";
 
 type SocialNetworksType = {
@@ -22,7 +22,7 @@ const socialNetworks: SocialNetworksType[] = [
     href: "https://wa.me/59891475727",
   },
   {
-    name: "Email",
+    name: "E-mail",
     icon: <Mail size={20} strokeWidth={1} />,
     href: "mailto:lucasregalado@hotmail.com",
   },
@@ -30,6 +30,11 @@ const socialNetworks: SocialNetworksType[] = [
     name: "Instagram",
     icon: <Instagram size={20} strokeWidth={1} />,
     href: "https://www.instagram.com/lucas.regalado18?igsh=aWw1dzBmMGExOGV3&utm_source=qr",
+  },
+  {
+    name: "ex-Twitter",
+    icon: <X size={20} strokeWidth={1} />,
+    href: "https://x.com/lucasregalado5",
   },
 ];
 
