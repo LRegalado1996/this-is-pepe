@@ -7,12 +7,11 @@ interface Props {
   className?: string;
 }
 
-export const Subtitle = ({ children, className }: Props) => {
+export const Subtitle = ({ children, className = "" }: Props) => {
   return (
-    <h2
-      className={`${titleFont.className} antialiased text-2xl font-bold text-dark-primary ${className}`}
-    >
-      {children}
-    </h2>
+    <div className={`${className}`}>
+      <div className="h-1 w-8 bg-dark-primary mb-1" />
+      <h2 className={`${titleFont.className} antialiased text-lg font-semibold`}>{children}</h2>
+    </div>
   );
 };
