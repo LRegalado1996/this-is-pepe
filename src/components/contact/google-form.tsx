@@ -1,12 +1,9 @@
-import React from "react";
 import { Subtitle } from "../ui/subtitle";
 
 export const GoogleFormContact = () => {
   return (
-    <>
-      <Subtitle className="mt-4">
-        I have left you the following form so that you can write to me
-      </Subtitle>
+    <div>
+      <Subtitle>I have left you the following form so that you can write to me</Subtitle>
       <div className="relative h-screen w-full">
         <iframe
           src="https://docs.google.com/forms/d/e/1FAIpQLSd5_Y749yiy8U2_aS0okWBZ-jvNg9VTXt8S1uQbTq_6fGgDLA/viewform?embedded=true"
@@ -15,6 +12,6 @@ export const GoogleFormContact = () => {
           Cargando…
         </iframe>
       </div>
-    </>
+    </div>
   );
 };
