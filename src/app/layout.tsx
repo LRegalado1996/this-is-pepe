@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${textFont.className} antialiased flex flex-col items-center justify-center min-w-svw min-h-dvh bg-light-primary`}
+        className={`${textFont.className} antialiased flex flex-col items-center justify-center min-w-svw min-h-dvh bg-light-primary text-tertiary`}
       >
         <Header />
 
