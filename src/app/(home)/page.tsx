@@ -1,4 +1,5 @@
 import { SocialNetworks, Title } from "@/components";
+import { MapPin } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
@@ -32,6 +33,11 @@ export default function Home() {
             and help others. I invite you to explore this site, where you&apos;ll find more
             information about who I am, my past projects, and how to contact me. Thank you for being
             here!
+          </p>
+
+          <p className="flex items-center w-fit text-center bg-light-primary border-2 border-dark-primary rounded-xl md:rounded-full p-2 md:px-8">
+            <MapPin size={20} strokeWidth={1} className="mr-2" />
+            Montevideo, Uruguay
           </p>
         </div>
       </section>
