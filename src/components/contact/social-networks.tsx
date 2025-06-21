@@ -47,7 +47,7 @@ export const SocialNetworks = ({ className }: Props) => {
     <div className={`mb-8 ${className}`}>
       <Subtitle className="mb-2">My Social Networks</Subtitle>
 
-      <ul className="flex gap-2 flex-wrap">
+      <ul className="flex flex-col md:flex-row gap-2 flex-wrap">
         {socialNetworks.map((socialNetwork, i) => (
           <li key={i}>
             <Link
