@@ -4,6 +4,10 @@ import Link from "next/link";
 import { Instagram, Linkedin, Mail, MessageCircle, X } from "lucide-react";
 import { Subtitle } from "../ui/subtitle";
 
+interface Props {
+  className: string;
+}
+
 type SocialNetworksType = {
   name: string;
   icon: ReactNode;
@@ -38,9 +42,9 @@ const socialNetworks: SocialNetworksType[] = [
   },
 ];
 
-export const SocialNetworks = () => {
+export const SocialNetworks = ({ className }: Props) => {
   return (
-    <div className="mb-8">
+    <div className={`mb-8 ${className}`}>
       <Subtitle className="mb-2">My Social Networks</Subtitle>
 
       <ul className="flex gap-2 flex-wrap">
