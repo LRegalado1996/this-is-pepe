@@ -1,10 +1,12 @@
-import { Subtitle, Title } from "@/components";
+import { Title, AllExperience } from "@/components";
 
 export default function WorkExperiencePage() {
   return (
     <div className="w-full max-w-[1280px] p-4">
       <Title className="mb-4">Work Experience</Title>
-      <ul className="p-4 bg-primary flex flex-col gap-2 ">
+
+      <AllExperience />
+      {/* <ul className="p-4 bg-primary flex flex-col gap-2 ">
         <li>
           <div className="p-4">
             <Subtitle className="mb-4 text-dark-primary">
@@ -20,7 +22,7 @@ export default function WorkExperiencePage() {
         </li>
         <li>2. Christmas Fair</li>
         <li>3. Pepe Shop</li>
-      </ul>
+      </ul> */}
     </div>
   );
 }
