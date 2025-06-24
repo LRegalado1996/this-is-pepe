@@ -20,6 +20,7 @@ export const HeaderLink = ({ page }: Props) => {
   return (
     <Link
       href={page.href}
+      aria-label={page.ariaLabel}
       className={`flex justify-center items-center gap-1 text-sm cursor-pointer py-2 px-4 rounded-full transition-all hover:bg-primary w-fit ${
         isActive && page.href !== "/" ? "bg-light-primary  font-semibold" : ""
       }`}

@@ -4,4 +4,5 @@ export type PagesType = {
   name: string;
   icon: ReactNode;
   href: string;
+  ariaLabel: string;
 };
