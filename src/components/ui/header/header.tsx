@@ -33,8 +33,8 @@ const pages: PagesType[] = [
 
 export const Header = () => {
   return (
-    <header className="w-full bg-dark-primary py-2 px-4 sticky top-0 z-10">
-      <ul className="flex gap-2 uppercase">
+    <header className="w-full bg-dark-primary sticky top-0 z-10">
+      <ul className="flex gap-2 uppercase max-w-[1280px] py-2 m-auto">
         {pages.map((page, i) => (
           <li key={i} className={i === 0 ? "flex-1" : ""}>
             <HeaderLink page={page} />
