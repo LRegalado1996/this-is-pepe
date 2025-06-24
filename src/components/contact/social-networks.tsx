@@ -5,7 +5,7 @@ import { Instagram, Linkedin, Mail, MessageCircle, X } from "lucide-react";
 import { Subtitle } from "../ui/subtitle";
 
 interface Props {
-  className: string;
+  className?: string;
 }
 
 type SocialNetworksType = {
@@ -42,7 +42,7 @@ const socialNetworks: SocialNetworksType[] = [
   },
 ];
 
-export const SocialNetworks = ({ className }: Props) => {
+export const SocialNetworks = ({ className = "" }: Props) => {
   return (
     <div className={`mb-8 ${className}`}>
       <Subtitle className="mb-2">My Social Networks</Subtitle>
