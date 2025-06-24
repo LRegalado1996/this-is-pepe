@@ -1,9 +1,16 @@
+import { Metadata } from "next";
 import { Title, AllExperience } from "@/components";
+
+export const metadata: Metadata = {
+  title: "Work Experience",
+  description:
+    "Explore the work experience of Lucas 'Pepe' Regalado, a full stack developer with expertise in React, Node.js, and TypeScript. Discover his career path, roles, and contributions to real-world projects.",
+};
 
 export default function WorkExperiencePage() {
   return (
     <div className="w-full max-w-[1280px] p-4">
-      <Title className="mb-4">Work Experience</Title>
+      <Title className="mb-4">Professional Experience</Title>
 
       <AllExperience />
       {/* <ul className="p-4 bg-primary flex flex-col gap-2 ">
