@@ -1,6 +1,6 @@
 interface Props {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick: () => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   className?: string;
