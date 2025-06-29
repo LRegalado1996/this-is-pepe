@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Title, AllExperience } from "@/components";
+import { Title, FormalExperience } from "@/components";
 
 export const metadata: Metadata = {
   title: "Work Experience",
@@ -12,7 +12,7 @@ export default function WorkExperiencePage() {
     <div className="w-full max-w-[1280px] p-4">
       <Title className="mb-4">Professional Experience</Title>
 
-      <AllExperience />
+      <FormalExperience />
       {/* <ul className="p-4 bg-primary flex flex-col gap-2 ">
         <li>
           <div className="p-4">
