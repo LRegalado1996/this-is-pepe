@@ -1,6 +1,6 @@
 import { Lora } from "next/font/google";
 
-const titleFont = Lora();
+const titleFont = Lora({ subsets: ["latin"] });
 
 interface Props {
   children: React.ReactNode;

@@ -4,7 +4,7 @@ import { Header } from "@/components";
 
 import "./globals.css";
 
-const textFont = DM_Sans();
+const textFont = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
