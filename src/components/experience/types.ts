@@ -9,7 +9,7 @@ export interface JobStructure {
     url: string;
   };
   startDates: Date;
-  endDates: Date;
+  endDates: Date | null;
   experiences: ReactNode;
   skils: string[];
 }
