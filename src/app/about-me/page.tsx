@@ -4,6 +4,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { 
   Title, 
   Subtitle, 
@@ -14,6 +15,10 @@ import {
   QuoteCard, 
   ExperienceCards,
   CurrentlyList,
+  QuickStats,
+  HobbiesCard,
+  FeaturedProjects,
+  PrimaryCTA,
   aboutDescription,
   interests,
   stackCategories,
@@ -61,13 +66,69 @@ export default function AboutMePage() {
         <BadgeList />
       </motion.div>
 
-      {/* About Me Section */}
+      {/* Quick Stats */}
       <motion.section variants={sectionVariants} className="mb-12">
-        <Subtitle className="mb-6">🌱 About Me</Subtitle>
-        <IntroCard title="" paragraphs={aboutDescription} />
+        <QuickStats />
       </motion.section>
 
-      {/* Interests Section */}
+      {/* About Me Section with Avatar and Speech Bubble */}
+      <motion.section variants={sectionVariants} className="mb-12">
+        <Subtitle className="mb-6">🌱 About Me</Subtitle>
+        <div className="flex flex-row-reverse gap-4 items-end">
+          {/* Avatar */}
+          <motion.div
+            className="flex-shrink-0"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.05, rotate: -3 }}
+          >
+            <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border-3 border-dark-primary overflow-hidden shadow-xl">
+              <Image
+                src="/images/me.png"
+                alt="Lucas Regalado"
+                width={80}
+                height={80}
+                className="object-cover w-full h-full"
+                priority
+              />
+            </div>
+          </motion.div>
+
+          {/* Chat bubble container */}
+          <div className="flex-1 relative w-full">
+            {/* WhatsApp-style tail pointing to avatar (right side, bottom aligned) */}
+            <div className="hidden md:block absolute -right-3 bottom-4 w-0 h-0 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent border-l-[16px] border-l-dark-primary/50" />
+            <div className="hidden md:block absolute -right-2.5 bottom-4 w-0 h-0 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent border-l-[16px] border-l-light-primary/90" />
+            
+            {/* Chat bubble */}
+            <motion.div
+              className="backdrop-blur-md bg-light-primary/90 border-2 border-dark-primary/50 rounded-2xl rounded-br-sm p-5 md:p-6 shadow-lg"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="flex flex-col gap-4">
+                {aboutDescription.map((paragraph, index) => (
+                  <p key={index} className="text-tertiary leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Hobbies & Interests */}
+      <motion.section variants={sectionVariants} className="mb-12">
+        <Subtitle className="mb-6">🎯 Beyond Code</Subtitle>
+        <HobbiesCard />
+      </motion.section>
+
+      {/* Interests - Professional */}
       <motion.section variants={sectionVariants} className="mb-12">
         <Subtitle className="mb-6">✨ I enjoy</Subtitle>
         <IntroCard title="" paragraphs={[]}>
@@ -87,9 +148,20 @@ export default function AboutMePage() {
         <ExperienceCards />
       </motion.section>
 
+      {/* Featured Projects */}
+      <motion.section variants={sectionVariants} className="mb-12">
+        <Subtitle className="mb-6">🚀 Featured Projects</Subtitle>
+        <FeaturedProjects />
+      </motion.section>
+
+      {/* Primary CTA */}
+      <motion.section variants={sectionVariants} className="mb-12">
+        <PrimaryCTA />
+      </motion.section>
+
       {/* Currently Section */}
       <motion.section variants={sectionVariants} className="mb-12">
-        <Subtitle className="mb-6">🚀 Currently</Subtitle>
+        <Subtitle className="mb-6">🔄 Currently</Subtitle>
         <IntroCard title="" paragraphs={[]}>
           <CurrentlyList items={currentlyDoing} />
         </IntroCard>

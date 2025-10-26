@@ -10,5 +10,9 @@ export { TechStackCategorized } from './tech-stack-categorized';
 export { QuoteCard } from './quote-card';
 export { ExperienceCards } from './experience-cards';
 export { CurrentlyList } from './currently-list';
+export { QuickStats } from './quick-stats';
+export { HobbiesCard } from './hobbies-card';
+export { FeaturedProjects } from './featured-projects';
+export { PrimaryCTA } from './primary-cta';
 export * from './data';
 
