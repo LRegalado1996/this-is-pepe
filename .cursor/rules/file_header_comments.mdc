@@ -1,0 +1,50 @@
+---
+description: Every file must have a header comment explaining its purpose
+alwaysApply: true
+---
+
+# File Header Comments
+
+Every code file in the project must include a comment at the beginning that explains its purpose and functionality.
+
+## Requirements:
+
+1. **Location**: Place the comment at the very top of the file
+2. **Language**: Write in English
+3. **Content**: Clearly describe what the file does and its main responsibility
+4. **Conciseness**: Keep it brief but informative (1-3 lines typically)
+
+## Format for different file types:
+
+### TypeScript/JavaScript/React
+```typescript
+/**
+ * Header component that displays the navigation menu with links to main sections.
+ */
+```
+
+### CSS/SCSS
+```css
+/**
+ * Global styles and CSS variables for the application theme.
+ */
+```
+
+### Configuration files
+```javascript
+/**
+ * ESLint configuration for enforcing code quality and style rules.
+ */
+```
+
+## What to include:
+- Primary purpose of the file
+- Main exported component/function/class
+- Key responsibility or functionality
+- Any important context (optional)
+
+## What NOT to include:
+- Author names (use git history instead)
+- Creation dates (use git history instead)
+- Excessive implementation details
+- Redundant information obvious from the file name

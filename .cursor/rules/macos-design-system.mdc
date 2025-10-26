@@ -1,0 +1,291 @@
+---
+description: macOS Big Sur Design System - Colors, Glassmorphism, Animations, Components and Implementation Guidelines
+alwaysApply: true
+---
+
+# macOS Big Sur Design System Rules
+
+## Color Palette
+
+### Primary Colors
+- **White**: `#FFFFFF`
+- **Light Blue**: `#60b0f3` (Primary accent, backgrounds)
+- **Dark Blue**: `#0a528e` (Deep accents, text, borders)
+
+### Green/Teal Accents
+- **Teal Light**: `#5eead4` (Success states, highlights, primary green)
+- **Teal Medium**: `#14b8a6` (Hover states, active elements)
+- **Teal Dark**: `#0f766e` (Text on light backgrounds, pressed states)
+
+### Neutral Grays (for glassmorphism)
+- **Glass White**: `rgba(255, 255, 255, 0.7)` - Light glass surfaces
+- **Glass Blue**: `rgba(96, 176, 243, 0.3)` - Colored glass surfaces
+- **Glass Dark**: `rgba(10, 82, 142, 0.2)` - Subtle overlays
+
+## Glassmorphism Standards
+
+### Glass Effect Components
+Apply glassmorphism to:
+- Navigation bars and headers
+- Cards and panels
+- Modal backgrounds
+- Dropdown menus
+- Sidebar elements
+- Button backgrounds (subtle)
+
+### Standard Glass Properties
+```css
+background: rgba(255, 255, 255, 0.7);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+```
+
+### Glass Variants
+1. **Light Glass** (default): `rgba(255, 255, 255, 0.7)` + `blur(20px)`
+2. **Medium Glass**: `rgba(255, 255, 255, 0.5)` + `blur(15px)`
+3. **Dark Glass**: `rgba(10, 82, 142, 0.3)` + `blur(25px)`
+4. **Subtle Glass**: `rgba(255, 255, 255, 0.4)` + `blur(10px)`
+
+## Transitions & Animations
+
+### Standard Timing
+- **Fast**: 150ms (micro-interactions, hover states)
+- **Normal**: 250ms (default for most transitions)
+- **Slow**: 400ms (page transitions, modals)
+- **Extra Slow**: 600ms (complex animations)
+
+### Easing Functions
+- **Default**: `cubic-bezier(0.4, 0, 0.2, 1)` - Smooth ease-in-out
+- **Bounce**: `cubic-bezier(0.68, -0.55, 0.265, 1.55)` - Playful spring
+- **Smooth**: `cubic-bezier(0.25, 0.46, 0.45, 0.94)` - macOS-like
+- **Sharp**: `cubic-bezier(0.4, 0, 0.6, 1)` - Quick and decisive
+
+### Hover Effects
+```css
+transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+/* On hover */
+transform: translateY(-2px) scale(1.02);
+box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+backdrop-filter: blur(25px);
+```
+
+### Scale Animations
+- **Subtle scale**: 1.02 (buttons, cards on hover)
+- **Medium scale**: 1.05 (icons, small elements)
+- **Large scale**: 1.1 (emphasis, active states)
+
+### Entrance Animations
+```css
+/* Fade in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Slide up */
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale fade */
+@keyframes scaleFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+```
+
+### Exit Animations
+```css
+/* Fade out */
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Slide down */
+@keyframes slideDown {
+  from { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+```
+
+## Component Implementation Rules
+
+### Buttons
+- Use glassmorphism for background
+- Add `backdrop-filter: blur(20px)`
+- Hover: scale(1.02) + increase blur to 25px
+- Active: scale(0.98)
+- Transition: 250ms with default easing
+- Border: 1px solid rgba(255, 255, 255, 0.3)
+- Shadow: subtle, increase on hover
+
+### Cards
+- Background: Light Glass variant
+- Border radius: 16px (macOS style)
+- Padding: 24px
+- Hover: translateY(-4px) + enhanced shadow
+- Transition: 400ms smooth easing
+- Always include backdrop-filter
+
+### Modals/Overlays
+- Backdrop: rgba(10, 82, 142, 0.4) with blur(10px)
+- Content: Light Glass with blur(30px)
+- Entrance: scaleFadeIn 400ms
+- Exit: fadeOut 300ms
+- Border radius: 20px
+
+### Navigation/Header
+- Fixed position with glassmorphism
+- Background: Glass White or Glass Blue
+- Blur: 30px for strong effect
+- Border bottom: 1px solid rgba(255, 255, 255, 0.2)
+- Sticky behavior with smooth transitions
+
+### Forms
+- Inputs: Glass background with subtle blur(15px)
+- Focus state: Increase border opacity + teal accent
+- Border radius: 12px
+- Transition: border and shadow 200ms
+- Placeholder: rgba(10, 82, 142, 0.5)
+
+## Typography
+
+### Font Weights
+- Light: 300 (subtitles, secondary text)
+- Regular: 400 (body text)
+- Medium: 500 (emphasized text)
+- Semibold: 600 (headings)
+- Bold: 700 (strong emphasis)
+
+### Text Colors
+- Primary: `#0a528e` (dark blue)
+- Secondary: `rgba(10, 82, 142, 0.7)`
+- Muted: `rgba(10, 82, 142, 0.5)`
+- On Glass: `#0a528e` or white depending on background
+
+## Spacing System (Tailwind-like)
+- **xs**: 4px
+- **sm**: 8px
+- **md**: 16px
+- **lg**: 24px
+- **xl**: 32px
+- **2xl**: 48px
+- **3xl**: 64px
+
+## Shadows
+
+### Shadow Levels
+```css
+/* Light */
+box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1);
+
+/* Medium */
+box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+
+/* Strong */
+box-shadow: 0 12px 40px rgba(31, 38, 135, 0.25);
+
+/* Extra Strong */
+box-shadow: 0 20px 60px rgba(31, 38, 135, 0.35);
+```
+
+## Border Radius Standards
+- **Small**: 8px (buttons, inputs)
+- **Medium**: 12px (cards, small containers)
+- **Large**: 16px (large cards, panels)
+- **Extra Large**: 20px (modals, major containers)
+- **Round**: 9999px (pills, badges)
+
+## Implementation Guidelines
+
+### Tailwind CSS - ALWAYS PREFERRED
+
+**IMPORTANT**: Tailwind CSS must be used whenever possible. This is the primary styling approach for the project.
+
+- **Always use Tailwind** as the first choice for styling
+- Only use custom CSS when Tailwind utilities are insufficient
+- Create custom Tailwind plugins for glassmorphism effects
+- Extend Tailwind config with:
+  - Custom colors (blue and teal palette)
+  - Custom animations (macOS-style transitions)
+  - Custom backdrop-blur utilities
+  - Custom shadow scales
+- Use `@apply` directive for reusable glass component patterns
+- Leverage Tailwind's arbitrary values for fine-tuning: `blur-[20px]`, `bg-[rgba(255,255,255,0.7)]`
+- Install and configure Tailwind properly before starting implementation
+
+### Framer Motion (Recommended)
+- Use for entrance/exit animations
+- Implement smooth page transitions
+- Add gesture animations (drag, hover)
+- Use layout animations for dynamic content
+
+### CSS Properties Order
+1. Display & positioning
+2. Box model (width, height, padding, margin)
+3. Background & border
+4. Backdrop filter & filter
+5. Typography
+6. Transforms
+7. Transitions & animations
+
+### Browser Compatibility
+- Always include `-webkit-backdrop-filter` for Safari
+- Provide fallback backgrounds for browsers without backdrop-filter support
+- Test glassmorphism on different background colors
+
+### Performance
+- Limit number of glassmorphism elements on screen
+- Use `will-change: transform` for animated elements
+- Avoid animating expensive properties (avoid animating blur directly)
+- Prefer transform and opacity for animations
+
+## Recommended Libraries
+1. **Tailwind CSS** - Utility-first styling (REQUIRED)
+2. **Framer Motion** - Advanced animations
+3. **clsx** or **cn** utility - Conditional classes
+4. **React Spring** (alternative) - Physics-based animations
+
+## Accessibility
+- Maintain contrast ratios (WCAG AA minimum)
+- Test text readability on glass backgrounds
+- Provide focus indicators with teal accent
+- Ensure animations respect `prefers-reduced-motion`
+- Add aria-labels to interactive elements
+
+## Testing Checklist
+
+Before considering a component complete:
+- [ ] Glassmorphism applied correctly
+- [ ] Hover states work smoothly
+- [ ] Transitions use proper timing and easing
+- [ ] Colors match the defined palette
+- [ ] Border radius follows standards
+- [ ] Shadows are appropriate for the hierarchy
+- [ ] Works with different backgrounds
+- [ ] Accessible focus states present
+- [ ] Responsive on all screen sizes
+- [ ] Safari compatibility (-webkit prefix)

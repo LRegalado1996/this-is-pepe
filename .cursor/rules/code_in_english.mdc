@@ -1,0 +1,50 @@
+---
+description: All code must be written in English
+alwaysApply: true
+---
+
+# Code in English
+
+All code-related elements must be written in English to maintain consistency and facilitate international collaboration.
+
+## What must be in English:
+
+### ✅ Required
+- Variable names
+- Function names
+- Class names
+- Interface names
+- Type definitions
+- Method names
+- Property names
+- Constant names
+- Enum values
+- Code comments (inline and block comments)
+- Documentation comments (JSDoc, TSDoc, etc.)
+- Git commit messages
+- Branch names
+- File names (when appropriate)
+
+### ❌ Not required
+- User-facing text and strings (can be in Spanish or other languages)
+- Content data
+- Chat conversations
+- Documentation for end users
+
+## Examples:
+
+**Good ✅**
+```typescript
+// Fetches user data from the API
+const fetchUserData = async (userId: string) => {
+  // Implementation here
+}
+```
+
+**Bad ❌**
+```typescript
+// Obtiene datos del usuario
+const obtenerDatosUsuario = async (idUsuario: string) => {
+  // Implementación aquí
+}
+```
