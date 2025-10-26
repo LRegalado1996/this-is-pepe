@@ -1,3 +1,6 @@
+/**
+ * Type definitions for job experience structure.
+ */
 import { ReactNode } from "react";
 
 export interface JobStructure {

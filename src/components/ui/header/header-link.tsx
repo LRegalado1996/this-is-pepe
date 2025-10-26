@@ -1,9 +1,13 @@
-"use client";
+/**
+ * Navigation link component with active state and icon animation.
+ */
+'use client';
 
-import Link from "next/link";
-import type { PagesType } from "./types";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { clsx } from 'clsx';
+import { usePathname } from 'next/navigation';
+import type { PagesType } from './types';
 
 interface Props {
   page: PagesType;
@@ -11,21 +15,27 @@ interface Props {
 
 export const HeaderLink = ({ page }: Props) => {
   const pathname = usePathname();
-  const [isActive, setIsActive] = useState(false);
-
-  useEffect(() => {
-    setIsActive(pathname === page.href);
-  }, [pathname, page.href]);
+  const isActive = pathname === page.href;
+  const isHome = page.href === '/';
 
   return (
     <Link
       href={page.href}
       aria-label={page.ariaLabel}
-      className={`flex justify-center items-center gap-1 text-sm cursor-pointer py-2 px-4 rounded-full transition-all hover:bg-primary w-fit ${
-        isActive && page.href !== "/" ? "bg-light-primary  font-semibold" : ""
-      }`}
+      className={clsx(
+        'flex justify-center items-center gap-1',
+        'text-sm py-2 px-4 rounded-full w-fit',
+        'transition-all cursor-pointer',
+        'hover:bg-primary',
+        isActive && !isHome && 'bg-light-primary font-semibold'
+      )}
     >
-      {page.icon}
+      <motion.span
+        whileHover={{ rotate: 5 }}
+        transition={{ type: 'spring', stiffness: 300 }}
+      >
+        {page.icon}
+      </motion.span>
       <span className="hidden md:block">{page.name}</span>
     </Link>
   );

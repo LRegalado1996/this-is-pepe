@@ -1,3 +1,6 @@
+/**
+ * Job history data containing detailed work experience information.
+ */
 import Link from "next/link";
 import { JobStructure } from "./types";
 
