@@ -1,0 +1,176 @@
+---
+description: Design guidelines for consistent UI including colors, glassmorphism, typography, and layout patterns
+alwaysApply: true
+---
+
+# Design Guidelines
+
+This document establishes the visual design system for the project, ensuring consistency across all components and pages.
+
+## Color Scale
+
+The project uses a warm, earthy color palette. Always use these semantic color tokens defined in `src/app/globals.css`:
+
+### Primary Colors
+- `dark-primary` (#a99985): Darker beige, used for emphasis, borders, and hover states
+- `light-primary` (#f5f1ed): Light cream, used for backgrounds and content containers
+- `primary` (#dad2bc): Medium beige, used for hover effects and subtle backgrounds
+
+### Secondary & Tertiary Colors
+- `secondary` (#70798c): Muted blue-grey, used for titles and important text
+- `tertiary` (#252323): Almost black, used for body text and strong contrast
+
+### Usage Rules
+1. **Backgrounds**: Use `bg-light-primary` for main backgrounds, `bg-primary` for secondary backgrounds
+2. **Text**: Use `text-tertiary` for body text, `text-secondary` for headings
+3. **Borders**: Prefer `border-dark-primary` with `border-2` for definition
+4. **Interactive states**: Use `hover:bg-primary` or `hover:bg-dark-primary` for buttons and links
+
+## Glassmorphism
+
+Glassmorphism creates depth and visual interest while maintaining readability. Apply where appropriate to create an "animated and happy" feeling.
+
+### When to Use
+- Overlay elements on images or videos
+- Cards that need to feel elevated but not solid
+- Navigation elements that need to be prominent but not obtrusive
+- Call-to-action sections
+
+### Implementation Pattern
+```typescript
+className="backdrop-blur-md bg-light-primary/80 border-2 border-dark-primary/50"
+```
+
+### Key Properties
+- `backdrop-blur-md` or `backdrop-blur-lg`: Creates the frosted glass effect
+- Semi-transparent backgrounds: Use `/80` or `/90` opacity
+- Subtle borders: Use `/50` or `/60` opacity on border colors
+- Combine with `shadow-lg` for additional depth
+
+### Examples
+```typescript
+// Glass card
+<div className="backdrop-blur-md bg-light-primary/90 border-2 border-dark-primary/50 rounded-xl p-6 shadow-lg">
+  {/* Content */}
+</div>
+
+// Glass navigation
+<nav className="backdrop-blur-lg bg-dark-primary/85 sticky top-0 z-10">
+  {/* Nav items */}
+</nav>
+```
+
+## Typography
+
+### Font Families
+- **Headings**: Lora (serif) - for titles and subtitles
+- **Body**: DM Sans (sans-serif) - for all body text and UI elements
+
+### Type Scale
+- `text-xl md:text-2xl`: Main page titles (h1)
+- `text-lg`: Section subtitles (h2)
+- `text-sm`: UI elements, buttons, navigation
+- Default size: Body text and paragraphs
+
+### Font Weights
+- `font-bold`: Primary titles
+- `font-semibold`: Subtitles, emphasized text, button labels
+- `font-normal`: Body text (default)
+
+### Always Use
+- `antialiased` on text elements for better rendering
+- `uppercase` for navigation items and buttons
+
+## Border Radius
+
+Consistent rounding creates a friendly, approachable aesthetic:
+
+- `rounded-full`: Pills, avatars, small buttons, and navigation items
+- `rounded-xl`: Cards, larger containers
+- `rounded-lg`: Medium buttons, form inputs
+
+## Spacing & Layout
+
+### Max Width
+- All content sections: `max-w-[1280px]`
+- Center with: `m-auto` or `flex items-center justify-center`
+
+### Padding
+- Pages: `p-4`
+- Cards: `p-4` or `p-6` for larger cards
+- Buttons: `py-2 px-4`
+- Compact buttons: `p-2`
+
+### Gaps
+- Tight spacing: `gap-1` or `gap-2`
+- Standard spacing: `gap-4`
+- Sections: `gap-8`
+
+## Interactive Elements
+
+### Transitions
+Always include smooth transitions for interactive states:
+```typescript
+className="transition-all hover:bg-primary"
+```
+
+### Hover States
+- Links: `hover:bg-primary`
+- Buttons: `hover:bg-dark-primary`
+- Icons: Maintain stroke-width consistency at `strokeWidth={1}`
+
+### Active States
+- Use `bg-light-primary font-semibold` for active navigation items
+- Combine with conditionals to show current state
+
+## Icons
+
+- Use **Lucide React** for all icons
+- Standard size: `size={20}`
+- Stroke width: `strokeWidth={1}` for consistency
+- Always include descriptive `aria-label` attributes
+
+## Accessibility
+
+1. **Semantic HTML**: Use appropriate HTML5 tags (header, main, section, nav)
+2. **ARIA labels**: Include `aria-label` on interactive elements, especially icon-only buttons
+3. **Contrast**: Maintain sufficient contrast between text and backgrounds
+4. **Focus states**: Ensure keyboard navigation is visible
+
+## Component Patterns
+
+### Cards with Borders
+```typescript
+<div className="bg-light-primary border-2 border-dark-primary rounded-xl p-4">
+  {/* Content */}
+</div>
+```
+
+### Pill Buttons
+```typescript
+<button className="py-2 px-4 rounded-full hover:bg-primary transition-all">
+  Label
+</button>
+```
+
+### Full-width Sections
+```typescript
+<section className="w-full max-w-[1280px] px-4">
+  {/* Content */}
+</section>
+```
+
+## Responsive Design
+
+- Mobile-first approach with Tailwind breakpoints
+- Use `md:` prefix for tablet/desktop styles
+- Hide non-essential text on mobile: `hidden md:block`
+- Stack on mobile, row on desktop: `flex-col md:flex-row`
+
+## Brand Personality
+
+The design should feel:
+- **Warm and approachable**: Through the earthy color palette
+- **Professional yet friendly**: Through balanced typography and spacing
+- **Animated and happy**: Through smooth transitions, glass effects, and interactive feedback
+- **Modern and clean**: Through generous whitespace and clear hierarchy

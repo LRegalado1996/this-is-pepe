@@ -1,0 +1,448 @@
+---
+description: Animation and motion guidelines using Framer Motion to create an animated and happy user experience
+alwaysApply: true
+---
+
+# Motion Guidelines
+
+This document defines the animation strategy for the project to create an "animated and happy" user experience while maintaining performance and professionalism.
+
+## Recommended Library: Framer Motion
+
+**Framer Motion** is the recommended animation library for this project.
+
+### Why Framer Motion?
+
+1. **React-first**: Built specifically for React with hooks and components
+2. **Declarative**: Simple, readable syntax that integrates naturally with JSX
+3. **Performance**: Hardware-accelerated animations using CSS transforms
+4. **Next.js compatible**: Works seamlessly with Server and Client Components
+5. **Feature-rich**: Gestures, variants, layout animations, scroll triggers, and more
+6. **Great DX**: Excellent TypeScript support and documentation
+7. **Small bundle**: Tree-shakeable and optimized for production
+
+### Installation
+
+```bash
+pnpm add framer-motion
+```
+
+## Animation Principles
+
+Follow these principles to maintain a cohesive, delightful experience:
+
+### 1. Purposeful Motion
+Every animation should serve a purpose:
+- Guide user attention
+- Provide feedback
+- Show relationships between elements
+- Indicate state changes
+- Enhance brand personality
+
+### 2. Natural and Playful
+Animations should feel natural and contribute to the "happy" brand:
+- Use gentle easing (not linear)
+- Prefer spring physics for organic feel
+- Add subtle bounces where appropriate
+- Avoid harsh, robotic motion
+
+### 3. Fast but Not Rushed
+- **Quick micro-interactions**: 150-250ms
+- **Standard transitions**: 300-500ms
+- **Page transitions**: 400-600ms
+- **Large movements**: Up to 800ms
+
+### 4. Performance First
+- Animate only `transform` and `opacity` when possible
+- Use `will-change` sparingly
+- Respect `prefers-reduced-motion`
+- Avoid animating layout properties (`width`, `height`, `top`, `left`)
+
+## Basic Usage
+
+### Simple Component Animation
+
+```typescript
+'use client';
+
+import { motion } from 'framer-motion';
+
+export const FadeInComponent = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+```
+
+### Hover Animations
+
+```typescript
+<motion.button
+  className="px-4 py-2 bg-primary rounded-full"
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+>
+  Click Me
+</motion.button>
+```
+
+### Stagger Children
+
+```typescript
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 },
+};
+
+<motion.ul variants={container} initial="hidden" animate="show">
+  {items.map((item, i) => (
+    <motion.li key={i} variants={item}>
+      {item}
+    </motion.li>
+  ))}
+</motion.ul>
+```
+
+## Animation Patterns for This Project
+
+### 1. Page Entry Animations
+
+All pages should have a subtle entry animation:
+
+```typescript
+'use client';
+
+import { motion } from 'framer-motion';
+
+export default function PageWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+```
+
+### 2. Navigation Links (Header)
+
+Enhance the header links with smooth hover effects:
+
+```typescript
+<motion.div
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.97 }}
+  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+>
+  <Link href={page.href}>
+    {/* Link content */}
+  </Link>
+</motion.div>
+```
+
+### 3. Button Component
+
+Add satisfying micro-interactions:
+
+```typescript
+<motion.button
+  className="..."
+  whileHover={{ scale: 1.03, y: -2 }}
+  whileTap={{ scale: 0.98 }}
+  transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+>
+  {children}
+</motion.button>
+```
+
+### 4. Card/Section Entry
+
+Cards should animate in with a fade + slide:
+
+```typescript
+<motion.section
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: '-100px' }}
+  transition={{ duration: 0.6, ease: 'easeOut' }}
+>
+  {/* Section content */}
+</motion.section>
+```
+
+### 5. Glass Morphism Cards
+
+Combine glassmorphism with subtle animation:
+
+```typescript
+<motion.div
+  className="backdrop-blur-md bg-light-primary/90 border-2 border-dark-primary/50 rounded-xl p-6"
+  initial={{ opacity: 0, scale: 0.95 }}
+  animate={{ opacity: 1, scale: 1 }}
+  whileHover={{ scale: 1.02 }}
+  transition={{ duration: 0.3 }}
+>
+  {/* Content */}
+</motion.div>
+```
+
+### 6. List Items (Work Experience, Social Networks)
+
+Stagger list item animations:
+
+```typescript
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { type: 'spring', stiffness: 100 },
+  },
+};
+
+<motion.ul variants={containerVariants} initial="hidden" animate="visible">
+  {items.map((item, i) => (
+    <motion.li key={i} variants={itemVariants}>
+      {item}
+    </motion.li>
+  ))}
+</motion.ul>
+```
+
+### 7. Timeline Animations (Node Structure)
+
+Animate the timeline nodes and connections:
+
+```typescript
+<motion.div
+  initial={{ height: 0 }}
+  animate={{ height: '100%' }}
+  transition={{ duration: 0.8, ease: 'easeInOut' }}
+  className="w-0.5 bg-primary"
+/>
+
+<motion.div
+  initial={{ scale: 0 }}
+  animate={{ scale: 1 }}
+  transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
+  className="w-4 h-4 rounded-full bg-dark-primary"
+/>
+```
+
+### 8. Scroll-triggered Animations
+
+For sections that appear as you scroll:
+
+```typescript
+<motion.div
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.3 }}
+  transition={{ duration: 0.6 }}
+>
+  {/* Content */}
+</motion.div>
+```
+
+## Easing Functions
+
+Use appropriate easing for different effects:
+
+```typescript
+// Gentle, natural (default for most cases)
+transition={{ ease: 'easeOut' }}
+
+// Smooth start and end
+transition={{ ease: 'easeInOut' }}
+
+// Playful bounce
+transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+
+// Sharp, responsive (buttons)
+transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+```
+
+## Layout Animations
+
+Animate layout changes automatically:
+
+```typescript
+<motion.div layout>
+  {/* Content that might change */}
+</motion.div>
+```
+
+## Accessibility: Reduced Motion
+
+Always respect user preferences:
+
+```typescript
+import { useReducedMotion } from 'framer-motion';
+
+const shouldReduceMotion = useReducedMotion();
+
+<motion.div
+  initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
+>
+  {/* Content */}
+</motion.div>
+```
+
+Or use Framer Motion's built-in support:
+
+```typescript
+// Automatically respects prefers-reduced-motion
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+/>
+```
+
+## Next.js Integration
+
+### Client Components
+
+Framer Motion requires client-side rendering. Always use `'use client'`:
+
+```typescript
+'use client';
+
+import { motion } from 'framer-motion';
+
+export const AnimatedComponent = () => {
+  return <motion.div>{/* ... */}</motion.div>;
+};
+```
+
+### Wrapping Server Components
+
+Create wrapper components for animated sections:
+
+```typescript
+// animated-wrapper.tsx
+'use client';
+
+import { motion } from 'framer-motion';
+
+export const AnimatedWrapper = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      {children}
+    </motion.div>
+  );
+};
+
+// page.tsx (Server Component)
+import { AnimatedWrapper } from '@/components/animated-wrapper';
+
+export default function Page() {
+  return (
+    <AnimatedWrapper>
+      {/* Server Component content */}
+    </AnimatedWrapper>
+  );
+}
+```
+
+## Performance Tips
+
+1. **Use `transform` and `opacity`**: Hardware accelerated
+2. **Avoid animating `width`, `height`, `top`, `left`**: Triggers layout recalculation
+3. **Use `layout` animations**: For complex layout changes
+4. **Lazy load animations**: Only animate what's visible
+5. **Throttle scroll listeners**: Use `viewport` prop with appropriate margins
+
+## Priority Implementation Order
+
+Focus on these components first for maximum impact:
+
+1. **Header navigation**: Subtle hover effects on links
+2. **Button component**: Scale and lift on hover/tap
+3. **Page transitions**: Fade in on route change
+4. **Work experience timeline**: Animate nodes and lines on view
+5. **Social network links**: Gentle hover animations
+6. **Home page cards**: Fade in with slight slide
+7. **Title/Subtitle components**: Fade in when in view
+
+## Testing Animations
+
+Verify:
+1. Animations don't block interaction
+2. Performance remains smooth (60fps)
+3. Reduced motion preferences are respected
+4. Animations feel natural, not robotic
+5. Mobile performance is acceptable
+
+## Examples in Context
+
+### Home Page Hero Section
+
+```typescript
+'use client';
+
+import { motion } from 'framer-motion';
+
+export default function Home() {
+  return (
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
+      <motion.div
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+        className="backdrop-blur-md bg-light-primary/90 border-2 border-dark-primary rounded-xl p-6"
+      >
+        {/* Hero content */}
+      </motion.div>
+    </motion.section>
+  );
+}
+```
+
+## Summary
+
+With Framer Motion:
+- Create delightful, purposeful animations
+- Maintain excellent performance
+- Enhance brand personality ("animated and happy")
+- Follow accessibility best practices
+- Keep code clean and maintainable
+
+The result: a professional, modern web experience that feels alive and engaging without being overwhelming.
