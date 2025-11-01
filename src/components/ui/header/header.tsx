@@ -5,7 +5,7 @@
 
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
-import { ChevronsLeftRightEllipsis, FlaskConical, House, Info, MessageCircle } from 'lucide-react';
+import { ChevronsLeftRightEllipsis, House, Info, MessageCircle } from 'lucide-react';
 import { PagesType } from './types';
 import { HeaderLink } from './header-link';
 
@@ -27,12 +27,6 @@ const pages: PagesType[] = [
     icon: <ChevronsLeftRightEllipsis size={20} strokeWidth={1} />,
     href: '/work-experience',
     ariaLabel: 'Go to Work Experience',
-  },
-  {
-    name: 'Laboratory',
-    icon: <FlaskConical size={20} strokeWidth={1} />,
-    href: '/labs',
-    ariaLabel: 'Go to Laboratory',
   },
   {
     name: 'Contact',
