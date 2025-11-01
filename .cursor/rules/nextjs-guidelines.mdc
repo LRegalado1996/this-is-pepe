@@ -1,0 +1,106 @@
+---
+description: Next.js best practices aligned with Vercel guidance (App Router, Server Components, performance)
+alwaysApply: true
+---
+
+# Next.js Guidelines
+
+These rules codify recommended Next.js practices (per Vercel’s App Router guidance) tailored to this codebase. Use them for all new features and when touching existing code.
+
+## Project Structure (App Router)
+- Use the `app/` directory with file-based routing (already in place).
+- Prefer route groups (e.g. `(home)`) to organize sections without affecting the URL.
+- Define `layout.tsx` per route group to share UI and metadata.
+- Provide `error.tsx`, `not-found.tsx`, and `loading.tsx` where appropriate for better UX and resilience.
+
+## Rendering & Data Fetching
+- Default to Server Components. Add `'use client'` only when necessary (state, effects, event handlers, browser-only APIs).
+- Prefer static rendering when possible:
+  - Use `generateStaticParams` for dynamic SSG.
+  - Use `export const revalidate = N` for ISR when content refresh is needed.
+- For dynamic data on every request, opt-in explicitly:
+  - `export const dynamic = 'force-dynamic'` or `fetch(url, { cache: 'no-store' })`.
+- For periodic revalidation of fetches, use `fetch(url, { next: { revalidate: N } })`.
+- Keep data fetching on the server whenever feasible; avoid `useEffect` for initial data.
+
+## Navigation & Routing
+- Use `next/link` for internal navigation; avoid `<a>` for internal links.
+- Use `usePathname`, `useSearchParams` only in Client Components.
+- Co-locate route-specific components under their route folders; keep shared UI in `src/components/`.
+
+## Metadata & SEO
+- Use the `export const metadata` object in pages/layouts for titles, descriptions, Open Graph, and Twitter metadata.
+- Prefer `generateMetadata` when metadata depends on dynamic data.
+
+## Performance
+- Images: always use `next/image` with `alt`. Provide `sizes` and `priority` for LCP images; use `placeholder="blur"` when helpful.
+- Fonts: use `next/font` (already used) to self-host Google fonts and reduce layout shift.
+- Minimize client JS:
+  - Keep components as Server Components by default.
+  - Use `dynamic(() => import('./ClientOnly'), { ssr: false })` only for truly client-only heavy widgets.
+- Code-split by route and component (App Router does this by default).
+- Prefer `transform` and `opacity` in animations; respect reduced motion (see Motion Guidelines).
+
+## Runtime Targets
+- Use Edge Runtime for low-latency, stateless handlers when applicable: `export const runtime = 'edge'`.
+- Default to Node.js runtime for features not yet supported on Edge.
+
+## API Routes (Route Handlers)
+- Implement API endpoints under `app/api/*/route.ts` using the Web Request/Response API.
+- Keep route handlers stateless and validate input; return proper status codes.
+
+## Environment Variables
+- Server-only secrets must NOT be exposed to the client.
+- Use `NEXT_PUBLIC_` prefix for variables read by Client Components.
+- Validate env at startup (e.g., with a small schema) when practical.
+
+## Static Assets
+- Serve static files from `public/`. For remote images, configure `images.remotePatterns` or `images.domains` in `next.config.ts`.
+
+## ESLint & Quality
+- Extend `eslint-config-next` with `next/core-web-vitals` rules.
+- Keep code in English (identifiers, comments). User-facing strings may be localized.
+- Enforce file header comments per project rules.
+
+## Accessibility
+- Prefer semantic HTML and accessible names. Ensure interactive elements have proper `aria-*` when needed.
+- Maintain sufficient contrast with the established color scale.
+- Provide visible focus states; test keyboard navigation.
+
+## DX Patterns for This Codebase
+- Accept `className` in reusable components; compose classes with `clsx`.
+- Follow the Design Guidelines color scale and Glassmorphism patterns.
+- For animations, use Framer Motion in Client Components or wrappers.
+
+## Handy Snippets
+```ts
+// Force static or dynamic per segment
+export const dynamic = 'force-static';
+// export const dynamic = 'force-dynamic';
+
+// Revalidate page-level data every 60s
+export const revalidate = 60;
+
+// Per-request fetch caching
+await fetch(url, { cache: 'no-store' });
+await fetch(url, { next: { revalidate: 60 } });
+
+// generateStaticParams for SSG
+export async function generateStaticParams() {
+  const items = await fetchData();
+  return items.map((item) => ({ slug: item.slug }));
+}
+
+// Dynamic metadata
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const data = await fetchPost(params.slug);
+  return { title: data.title, description: data.excerpt };
+}
+```
+
+## References
+- Next.js App Router Docs (`https://nextjs.org/docs/app`)
+- Data Fetching and Caching (`https://nextjs.org/docs/app/building-your-application/data-fetching`)
+- Metadata (`https://nextjs.org/docs/app/building-your-application/optimizing/metadata`)
+- Images (`https://nextjs.org/docs/app/building-your-application/optimizing/images`)
+- Fonts (`https://nextjs.org/docs/app/building-your-application/optimizing/fonts`)

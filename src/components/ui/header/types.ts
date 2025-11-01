@@ -1,3 +1,6 @@
+/**
+ * Type definitions for header navigation pages.
+ */
 import { ReactNode } from "react";
 
 export type PagesType = {

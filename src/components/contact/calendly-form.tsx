@@ -1,3 +1,6 @@
+/**
+ * Calendly integration component for scheduling meetings.
+ */
 import { Subtitle } from "../ui/subtitle";
 
 export const CalendlyForm = () => {

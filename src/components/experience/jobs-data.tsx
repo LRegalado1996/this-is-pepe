@@ -1,5 +1,48 @@
+/**
+ * Job history data containing detailed work experience information.
+ */
 import Link from "next/link";
 import { JobStructure } from "./types";
+
+const streaver: JobStructure = {
+  company: {
+    name: "Streaver",
+    url: "https://streaver.com/",
+  },
+  startDates: new Date("2025-08-01"),
+  endDates: null,
+  experiences: (
+    <div className="flex flex-col gap-4">
+      <p>
+        I joined Streaver, a boutique agency focused on AI-driven solutions, to turn bold ideas into 
+        innovative products. My role involves building web applications with Next.js, PostgreSQL, and 
+        Drizzle ORM, all deployed on Vercel.
+      </p>
+      <p>
+        Currently, I&apos;m working on a project for a U.S.-based organization that connects tech 
+        companies, fosters collaboration, and strengthens the IT community.
+      </p>
+      <p>
+        I focus on creating scalable, efficient solutions that optimize internal processes and enhance 
+        the user experience, contributing to a platform that encourages collaboration and growth within 
+        the tech ecosystem.
+      </p>
+    </div>
+  ),
+  skils: [
+    "Next.js",
+    "React.js",
+    "TypeScript",
+    "Vercel",
+    "PostgreSQL",
+    "React Query",
+    "Drizzle",
+    "GitHub",
+    "Cursor",
+    "pnpm",
+    "Jira"
+  ],
+};
 
 const laOfertaIrresistible: JobStructure = {
   company: {
@@ -258,4 +301,4 @@ const zureo: JobStructure = {
   skils: ["JavasScript", "JQuery", "CSS", "LESS", "HTML"],
 };
 
-export const jobsData: JobStructure[] = [laOfertaIrresistible, medable, onetree, guataco, zureo];
+export const jobsData: JobStructure[] = [streaver, laOfertaIrresistible, medable, onetree, guataco, zureo];

@@ -1,3 +1,6 @@
+/**
+ * Google Forms integration component for contact messages.
+ */
 import { Subtitle } from "../ui/subtitle";
 
 export const GoogleFormContact = () => {

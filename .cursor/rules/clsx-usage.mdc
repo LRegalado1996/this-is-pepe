@@ -1,0 +1,297 @@
+---
+description: Guidelines for using clsx library to manage conditional and dynamic className logic
+alwaysApply: true
+---
+
+# clsx Usage
+
+This rule establishes how to use the `clsx` library for managing conditional CSS classes in a clean, maintainable way.
+
+## What is clsx?
+
+`clsx` is a tiny utility for constructing `className` strings conditionally. It's faster and more readable than template literals and manual string concatenation.
+
+## Installation
+
+First, install the library:
+```bash
+pnpm add clsx
+```
+
+## When to Use clsx
+
+### ✅ Always Use clsx For
+
+1. **Conditional classes**: When classes depend on state, props, or logic
+2. **Multiple conditions**: When combining several conditional class names
+3. **Optional classes**: When a className prop might be undefined
+4. **Complex logic**: When readability suffers from template literals
+
+### ❌ Don't Use clsx For
+
+1. **Static classes**: When all classes are always applied
+2. **Single constant className**: No benefit over a simple string
+3. **Performance-critical loops**: Though clsx is fast, plain strings are faster (rare case)
+
+## Basic Usage
+
+### Simple Conditional
+**Before:**
+```typescript
+className={`base-class ${isActive ? 'active-class' : ''}`}
+```
+
+**After:**
+```typescript
+import { clsx } from 'clsx';
+
+className={clsx('base-class', isActive && 'active-class')}
+```
+
+### Multiple Conditions
+**Before:**
+```typescript
+className={`base-class ${isActive ? 'active' : ''} ${isDisabled ? 'disabled' : ''} ${className || ''}`}
+```
+
+**After:**
+```typescript
+className={clsx('base-class', {
+  'active': isActive,
+  'disabled': isDisabled,
+}, className)}
+```
+
+### With Optional Props
+**Before:**
+```typescript
+className={`flex items-center ${className ? className : ''}`}
+```
+
+**After:**
+```typescript
+className={clsx('flex items-center', className)}
+```
+
+## Migration Examples from Current Code
+
+### Example 1: Button Component
+
+**Current (button.tsx):**
+```typescript
+className={`bg-primary py-2 px-4 rounded-lg text-sm uppercase font-semibold cursor-pointer transition-all hover:bg-dark-primary ${className}`}
+```
+
+**Improved:**
+```typescript
+import { clsx } from 'clsx';
+
+className={clsx(
+  'bg-primary py-2 px-4 rounded-lg text-sm uppercase font-semibold cursor-pointer',
+  'transition-all hover:bg-dark-primary',
+  className
+)}
+```
+
+### Example 2: Header Link Component
+
+**Current (header-link.tsx):**
+```typescript
+className={`flex justify-center items-center gap-1 text-sm cursor-pointer py-2 px-4 rounded-full transition-all hover:bg-primary w-fit ${
+  isActive && page.href !== "/" ? "bg-light-primary  font-semibold" : ""
+}`}
+```
+
+**Improved:**
+```typescript
+import { clsx } from 'clsx';
+
+className={clsx(
+  'flex justify-center items-center gap-1 text-sm cursor-pointer',
+  'py-2 px-4 rounded-full transition-all hover:bg-primary w-fit',
+  isActive && page.href !== "/" && 'bg-light-primary font-semibold'
+)}
+```
+
+### Example 3: Social Networks Component
+
+**Current (social-networks.tsx):**
+```typescript
+<div className={`mb-8 ${className}`}>
+```
+
+**Improved:**
+```typescript
+import { clsx } from 'clsx';
+
+<div className={clsx('mb-8', className)}>
+```
+
+## Advanced Patterns
+
+### Object Syntax for Multiple Conditions
+```typescript
+className={clsx('base-class', {
+  'text-primary': isPrimary,
+  'text-secondary': isSecondary,
+  'font-bold': isBold,
+  'underline': isUnderlined,
+})}
+```
+
+### Arrays for Grouping
+```typescript
+className={clsx([
+  // Layout
+  'flex items-center gap-2',
+  // Sizing
+  'w-full h-12',
+  // Styling
+  'bg-primary rounded-lg',
+  // States
+  isActive && 'bg-dark-primary',
+  isDisabled && 'opacity-50 cursor-not-allowed',
+  // Custom
+  className,
+])}
+```
+
+### With Ternary (When Needed)
+```typescript
+className={clsx(
+  'base-class',
+  status === 'success' ? 'text-green-600' : 'text-red-600',
+  className
+)}
+```
+
+## Best Practices
+
+### 1. Group Related Classes
+```typescript
+// Good: Grouped by purpose
+className={clsx(
+  // Layout
+  'flex items-center justify-between',
+  // Spacing
+  'p-4 gap-2',
+  // Visual
+  'bg-primary rounded-lg border-2 border-dark-primary',
+  // Interactive
+  'transition-all hover:bg-dark-primary',
+  // Conditional
+  isActive && 'bg-dark-primary',
+  className
+)}
+
+// Avoid: All in one line
+className={clsx('flex items-center justify-between p-4 gap-2 bg-primary rounded-lg border-2 border-dark-primary transition-all hover:bg-dark-primary', isActive && 'bg-dark-primary', className)}
+```
+
+### 2. Always Accept className Prop
+For reusable components, always allow className override:
+```typescript
+interface Props {
+  children: React.ReactNode;
+  className?: string;
+  isActive?: boolean;
+}
+
+export const MyComponent = ({ children, className, isActive }: Props) => {
+  return (
+    <div className={clsx('base-classes', isActive && 'active-classes', className)}>
+      {children}
+    </div>
+  );
+};
+```
+
+### 3. Extract Complex Logic
+```typescript
+// Good: Clear and reusable
+const buttonClasses = clsx(
+  'px-4 py-2 rounded-lg transition-all',
+  {
+    'bg-primary hover:bg-dark-primary': variant === 'primary',
+    'bg-secondary hover:bg-secondary/80': variant === 'secondary',
+    'opacity-50 cursor-not-allowed': disabled,
+  },
+  className
+);
+
+return <button className={buttonClasses}>{children}</button>;
+```
+
+### 4. TypeScript Integration
+```typescript
+import { clsx, type ClassValue } from 'clsx';
+
+interface Props {
+  className?: ClassValue; // Accepts string, array, object, etc.
+}
+```
+
+## Migration Strategy
+
+### Phase 1: New Components
+- All new components must use `clsx` from day one
+- No exceptions for conditional className logic
+
+### Phase 2: Refactor on Touch
+- When editing existing components, migrate to `clsx`
+- Focus on components with complex conditional logic first
+
+### Phase 3: Priority Components
+High-priority components to migrate:
+1. `button.tsx` - Base UI component used everywhere
+2. `header-link.tsx` - Complex conditional logic
+3. `social-networks.tsx` - Simple but used frequently
+4. Any new glassmorphism components
+
+## Testing
+
+After migration, ensure:
+1. Visual appearance is unchanged
+2. Conditional classes still apply correctly
+3. No extra whitespace in generated class strings
+4. TypeScript has no errors
+
+## Common Pitfalls
+
+### ❌ Avoid
+```typescript
+// Unnecessary for static classes
+className={clsx('static-class')}
+
+// Missing base classes
+className={clsx(isActive && 'active')} // No fallback
+
+// Too nested
+className={clsx(a ? clsx(b ? 'x' : 'y') : 'z')}
+```
+
+### ✅ Prefer
+```typescript
+// Simple string for static
+className="static-class"
+
+// Always include base
+className={clsx('base-class', isActive && 'active')}
+
+// Flatten logic
+className={clsx('base', a && b && 'x', a && !b && 'y', !a && 'z')}
+```
+
+## Resources
+
+- [clsx GitHub](https://github.com/lukeed/clsx)
+- [clsx vs classnames comparison](https://github.com/lukeed/clsx#benchmarks)
+
+## Summary
+
+Using `clsx` will:
+- Improve code readability
+- Make conditional styling more maintainable
+- Reduce bugs from manual string concatenation
+- Follow modern React best practices
+- Align with the project's goal of clean, professional code

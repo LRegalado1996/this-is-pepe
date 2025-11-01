@@ -1,3 +1,6 @@
+/**
+ * Job description component with expandable details and skills list.
+ */
 "use client";
 
 import Link from "next/link";

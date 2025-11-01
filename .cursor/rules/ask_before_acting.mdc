@@ -1,0 +1,27 @@
+---
+description: Always ask before making significant changes to the codebase
+alwaysApply: true
+---
+
+# Always Ask Before Acting
+
+Before making any significant changes to the code, you must:
+
+1. **Explain** what you plan to do
+2. **Ask for confirmation** from the user
+3. **Wait** for approval before proceeding
+
+This ensures that all changes align with the project's goals and the user's expectations.
+
+## Examples of significant changes:
+- Creating new files or components
+- Modifying existing functionality
+- Refactoring code structure
+- Installing new dependencies
+- Changing configuration files
+- Deleting code or files
+
+## Exceptions:
+- Minor formatting fixes
+- Obvious typo corrections
+- Changes explicitly requested by the user
