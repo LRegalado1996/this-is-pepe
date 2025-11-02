@@ -1,10 +1,46 @@
-import { Metadata } from "next";
+/**
+ * Work Experience page highlighting Lucas Regalado's professional history and responsibilities.
+ */
+import type { Metadata } from "next";
 import { Title, FormalExperience } from "@/components";
+import {
+  openGraphImagePath,
+  primaryKeywords,
+  siteName,
+  siteTaglineEn,
+  siteUrl,
+} from "@/lib/seo/config";
+
+const pageTitle = "Lucas Regalado | Work Experience";
+const pageDescription = `${siteTaglineEn} Review the professional journey across Streaver, LOi, Medable, and more.`;
 
 export const metadata: Metadata = {
-  title: "Work Experience",
-  description:
-    "Explore the work experience of Lucas 'Pepe' Regalado, a full stack developer with expertise in React, Node.js, and TypeScript. Discover his career path, roles, and contributions to real-world projects.",
+  title: pageTitle,
+  description: pageDescription,
+  keywords: [...primaryKeywords, "work experience", "Lucas Regalado resume"],
+  alternates: {
+    canonical: "/work-experience",
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: `${siteUrl}/work-experience`,
+    siteName,
+    type: "profile",
+    images: [
+      {
+        url: openGraphImagePath,
+        width: 800,
+        height: 800,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [openGraphImagePath],
+  },
 };
 
 export default function WorkExperiencePage() {

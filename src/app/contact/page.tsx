@@ -1,10 +1,52 @@
+/**
+ * Contact page with booking and messaging options for reaching Lucas Regalado.
+ */
 import { CalendlyForm, GoogleFormContact, SocialNetworks, Title } from "@/components";
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import {
+  author,
+  openGraphImagePath,
+  primaryKeywords,
+  siteName,
+  siteTaglineEn,
+  siteUrl,
+  socialProfiles,
+} from "@/lib/seo/config";
+
+const pageTitle = "Contact Lucas Regalado | Book a Call or Send a Message";
+const pageDescription = `${siteTaglineEn} Contact Lucas for freelance projects, senior full stack roles, or technical mentorship in English and Spanish.`;
 
 export const metadata: Metadata = {
-  title: "Contact Me",
-  description:
-    "Get in touch with Lucas 'Pepe' Regalado, a full stack developer from Uruguay specialized in React, Node.js, and TypeScript. Reach out for job opportunities, freelance work, or collaborations.",
+  title: pageTitle,
+  description: pageDescription,
+  keywords: [...primaryKeywords, "contact lucas regalado", "senior developer consultation"],
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: `${siteUrl}/contact`,
+    siteName,
+    type: "website",
+    images: [
+      {
+        url: openGraphImagePath,
+        width: 800,
+        height: 800,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [openGraphImagePath],
+  },
+  other: {
+    "contact:email": author.email,
+    "contact:whatsapp": socialProfiles.whatsapp,
+  },
 };
 
 export default function ContactPage() {
