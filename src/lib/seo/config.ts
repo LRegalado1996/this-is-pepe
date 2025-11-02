@@ -68,7 +68,12 @@ export const structuredData = {
         addressLocality: author.location.city,
         addressCountry: author.location.country,
       },
-      sameAs: Object.values(socialProfiles),
+      sameAs: [
+        socialProfiles.linkedin,
+        socialProfiles.whatsapp,
+        socialProfiles.instagram,
+        socialProfiles.twitter,
+      ],
     } as const;
   },
   website() {
