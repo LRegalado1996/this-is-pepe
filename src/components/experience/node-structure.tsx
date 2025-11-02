@@ -33,7 +33,7 @@ export const NodeStructure = ({ jobsStructure }: Props) => {
             whileInView={{ scale: 1 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{
-              type: 'spring',
+              type: 'spring' as const,
               stiffness: 200,
               delay: i * 0.1 + 0.3,
             }}
