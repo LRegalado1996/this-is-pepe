@@ -1,36 +1,28 @@
 /**
- * Header component with glassmorphism effect and navigation menu.
+ * Sticky header: paper glass over content, display wordmark, uppercase nav
+ * with volt active/hover underlines.
  */
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
-import { ChevronsLeftRightEllipsis, House, Info, MessageCircle } from 'lucide-react';
 import { PagesType } from './types';
 import { HeaderLink } from './header-link';
 
 const pages: PagesType[] = [
   {
-    name: '',
-    icon: <House size={20} strokeWidth={1} />,
-    href: '/',
-    ariaLabel: 'Go to Home',
-  },
-  {
-    name: 'About Me',
-    icon: <Info size={20} strokeWidth={1} />,
+    name: 'About',
     href: '/about-me',
     ariaLabel: 'Go to About Me',
   },
   {
-    name: 'Work Experience',
-    icon: <ChevronsLeftRightEllipsis size={20} strokeWidth={1} />,
+    name: 'Experience',
     href: '/work-experience',
     ariaLabel: 'Go to Work Experience',
   },
   {
     name: 'Contact',
-    icon: <MessageCircle size={20} strokeWidth={1} />,
     href: '/contact',
     ariaLabel: 'Go to Contact',
   },
@@ -40,27 +32,32 @@ export const Header = () => {
   return (
     <motion.header
       className={clsx(
-        'w-full sticky top-0 z-10',
-        'backdrop-blur-lg bg-dark-primary/90',
-        'border-b border-dark-primary/50',
-        'transition-all duration-300'
+        'w-full sticky top-0 z-20',
+        'backdrop-blur-lg bg-paper/85',
+        'border-b border-ink/10'
       )}
-      initial={{ y: -100 }}
+      initial={{ y: -80 }}
       animate={{ y: 0 }}
-      transition={{ type: 'spring', stiffness: 100 }}
+      transition={{ type: 'spring', stiffness: 120, damping: 20 }}
     >
-      <ul className="flex gap-2 uppercase max-w-[1280px] py-2 px-4 m-auto">
-        {pages.map((page, i) => (
-          <motion.li
-            key={i}
-            className={clsx(i === 0 && 'flex-1')}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-          >
-            <HeaderLink page={page} />
-          </motion.li>
-        ))}
-      </ul>
+      <nav className="flex items-center justify-between max-w-[1280px] py-3 px-4 m-auto">
+        <Link
+          href="/"
+          aria-label="Go to Home"
+          className="font-display text-xl md:text-2xl tracking-tight hover:text-moss transition-colors"
+        >
+          Lucas Regalado
+          <span className="text-volt-dim">.</span>
+        </Link>
+
+        <ul className="flex items-center gap-1 md:gap-2">
+          {pages.map((page) => (
+            <li key={page.href}>
+              <HeaderLink page={page} />
+            </li>
+          ))}
+        </ul>
+      </nav>
     </motion.header>
   );
 };

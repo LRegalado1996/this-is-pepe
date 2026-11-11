@@ -1,9 +1,91 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark-primary: #a99985;
-  --color-light-primary: #f5f1ed;
-  --color-primary: #dad2bc; /* Beige */
-  --color-secondary: #70798c; /* Old Blue */
-  --color-tertiary: #252323; /* Dark Grey */
+  /*
+   * Brand 2026 — "Volt" system.
+   * Light-first: cream base with green-tinted neutrals, moss blocks for
+   * contrast, volt lime as the single loud accent (never > ~5% of a screen).
+   */
+  --color-paper: #f0f1e6;
+  --color-paper-2: #e3e5d3;
+  --color-ink: #15160f;
+  --color-moss: #262a1d;
+  --color-moss-2: #343827;
+  --color-volt: #d4ff00;
+  --color-volt-dim: #aec72e;
+  --color-stone: #b6b9a4;
+
+  /* Legacy aliases kept so existing pages pick up the new palette. */
+  --color-dark-primary: #b6b9a4;
+  --color-light-primary: #f0f1e6;
+  --color-primary: #e3e5d3;
+  --color-secondary: #262a1d;
+  --color-tertiary: #15160f;
+
+  --font-display: var(--font-anton), Impact, "Arial Narrow Bold", sans-serif;
+  --font-sans: var(--font-mona), "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+::selection {
+  background: var(--color-volt);
+  color: var(--color-ink);
+}
+
+/* Display type is always uppercase and tight, like the brand spec. */
+.font-display {
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+}
+
+/* Infinite marquee band. The track holds two copies of its content. */
+@keyframes marquee-slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-slide var(--marquee-duration, 30s) linear infinite;
+}
+
+/* Duotone (moss + volt) photo treatment. */
+.duotone {
+  position: relative;
+  background: var(--color-moss);
+}
+
+.duotone > img {
+  filter: grayscale(1) contrast(1.15) brightness(0.92);
+}
+
+.duotone::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--color-moss);
+  mix-blend-mode: lighten;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--color-volt);
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
 }

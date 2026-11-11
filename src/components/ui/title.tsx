@@ -1,13 +1,10 @@
 /**
- * Main title component (h1) with Lora font and optional fade-in animation.
+ * Main title component (h1) in the brand display face with optional fade-in.
  */
 'use client';
 
-import { Lora } from 'next/font/google';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
-
-const titleFont = Lora({ subsets: ['latin'] });
 
 interface Props {
   children: React.ReactNode;
@@ -21,8 +18,7 @@ export const Title = ({ children, className, animated = true }: Props) => {
   return (
     <Component
       className={clsx(
-        titleFont.className,
-        'antialiased text-xl md:text-2xl font-bold text-secondary uppercase',
+        'font-display antialiased text-2xl md:text-4xl text-moss',
         className
       )}
       {...(animated && {

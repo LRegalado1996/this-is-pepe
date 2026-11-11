@@ -1,11 +1,8 @@
 /**
- * Type definitions for header navigation pages.
+ * Types for the header navigation entries.
  */
-import { ReactNode } from "react";
-
-export type PagesType = {
+export interface PagesType {
   name: string;
-  icon: ReactNode;
   href: string;
   ariaLabel: string;
-};
+}

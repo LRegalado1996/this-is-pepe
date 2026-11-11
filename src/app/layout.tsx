@@ -2,8 +2,9 @@
  * Root layout that configures global metadata, fonts, and shared UI elements.
  */
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Anton, Mona_Sans } from "next/font/google";
 import { Header } from "@/components";
+import { SmoothScroll } from "@/components/ui/smooth-scroll";
 import {
   author,
   defaultOgImageAlt,
@@ -19,7 +20,16 @@ import {
 
 import "./globals.css";
 
-const textFont = DM_Sans({ subsets: ["latin"] });
+const displayFont = Anton({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-anton",
+});
+
+const textFont = Mona_Sans({
+  subsets: ["latin"],
+  variable: "--font-mona",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -97,13 +107,12 @@ export default function RootLayout({
         <link rel="me" href={socialProfiles.instagram} />
       </head>
       <body
-        className={`${textFont.className} antialiased flex flex-col items-center justify-center min-w-svw min-h-dvh bg-light-primary text-tertiary`}
+        className={`${displayFont.variable} ${textFont.variable} font-sans antialiased flex flex-col items-center justify-center min-w-svw min-h-dvh bg-paper text-ink`}
       >
+        <SmoothScroll />
         <Header />
 
-        {/* max-w-[1280px] */}
         <main className="flex-1 w-full flex flex-col items-center">{children}</main>
-        {/* <Footer /> */}
       </body>
     </html>
   );

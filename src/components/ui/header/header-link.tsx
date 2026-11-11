@@ -1,10 +1,9 @@
 /**
- * Navigation link component with active state and icon animation.
+ * Navigation link with an animated volt underline for hover/active states.
  */
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
 import { usePathname } from 'next/navigation';
 import type { PagesType } from './types';
@@ -16,27 +15,26 @@ interface Props {
 export const HeaderLink = ({ page }: Props) => {
   const pathname = usePathname();
   const isActive = pathname === page.href;
-  const isHome = page.href === '/';
 
   return (
     <Link
       href={page.href}
       aria-label={page.ariaLabel}
+      aria-current={isActive ? 'page' : undefined}
       className={clsx(
-        'flex justify-center items-center gap-1',
-        'text-sm py-2 px-4 rounded-full w-fit',
-        'transition-all cursor-pointer',
-        'hover:bg-primary',
-        isActive && !isHome && 'bg-light-primary font-semibold'
+        'relative group inline-block py-2 px-3',
+        'text-xs md:text-sm uppercase tracking-[0.14em] font-semibold',
+        'transition-colors hover:text-moss'
       )}
     >
-      <motion.span
-        whileHover={{ rotate: 5 }}
-        transition={{ type: 'spring', stiffness: 300 }}
-      >
-        {page.icon}
-      </motion.span>
-      <span className="hidden md:block">{page.name}</span>
+      {page.name}
+      <span
+        className={clsx(
+          'absolute left-3 right-3 bottom-1 h-[3px] bg-volt',
+          'origin-left transition-transform duration-200',
+          isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+        )}
+      />
     </Link>
   );
 };
