@@ -1,7 +1,8 @@
 /**
  * Shared SEO configuration containing site metadata, keyword strategy, and social profile links.
  */
-export const siteUrl = "https://lucasregalado.dev" as const;
+// TODO: switch to https://lucasregalado.com once the domain is purchased and connected.
+export const siteUrl = "https://this-is-pepe.vercel.app" as const;
 
 export const siteName = "Lucas Regalado · Full Stack Developer" as const;
 
