@@ -6,6 +6,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { MapPin } from 'lucide-react';
 import { careerStartYear } from '@/components/about/data';
 
@@ -69,9 +70,12 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.75, duration: 0.6 }}
           >
-            <span className="inline-block bg-volt text-ink text-[0.7rem] uppercase tracking-[0.14em] font-bold rounded-full px-4 py-2">
-              Open to work
-            </span>
+            <Link
+              href="/contact"
+              className="inline-block bg-volt text-ink text-[0.7rem] uppercase tracking-[0.14em] font-bold rounded-full px-4 py-2 transition-transform hover:scale-[1.04]"
+            >
+              Let&apos;s work together
+            </Link>
             <span className="inline-flex items-center gap-1.5 border border-ink/30 text-[0.7rem] uppercase tracking-[0.14em] font-semibold rounded-full px-4 py-2">
               <MapPin size={13} strokeWidth={1.75} />
               Montevideo, UY
