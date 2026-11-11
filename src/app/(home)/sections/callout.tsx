@@ -6,6 +6,9 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { careerStartYear } from '@/components/about/data';
+
+const yearsInTheField = new Date().getFullYear() - careerStartYear;
 
 const words = ['I', 'build', 'web', 'products', 'that', 'scale.'];
 
@@ -45,8 +48,8 @@ export const Callout = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
-          8+ years shipping for teams in the US and Europe — from Montevideo,
-          Uruguay.
+          {yearsInTheField} years shipping for teams in the US and Europe —
+          from Montevideo, Uruguay.
         </motion.p>
       </div>
     </section>

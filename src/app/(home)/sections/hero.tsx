@@ -7,6 +7,9 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
+import { careerStartYear } from '@/components/about/data';
+
+const yearsInTheField = new Date().getFullYear() - careerStartYear;
 
 const lineReveal = {
   hidden: { y: '110%' },
@@ -55,8 +58,9 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
-            I build web products that scale. 8+ years shipping with React,
-            Next.js and TypeScript for teams in the US, Europe and Uruguay.
+            I build web products that scale. {yearsInTheField} years shipping
+            with React, Next.js and TypeScript for teams in the US, Europe and
+            Uruguay.
           </motion.p>
 
           <motion.div
