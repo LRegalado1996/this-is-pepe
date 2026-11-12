@@ -47,13 +47,14 @@ const twitterHandle = "@lucasregalado5";
 
 const ogLocale: Record<Locale, string> = { en: "en_US", es: "es_UY" };
 
-/** Served by `src/app/opengraph-image.tsx`. */
-export const shareImage = {
-  url: "/opengraph-image",
+/** The share card of a page, served by `src/app/share/[locale]/[image]/route.tsx`. */
+const shareImage = (name: string, locale: Locale, title: string) => ({
+  url: `/share/${locale}/${name}.png`,
   width: 1200,
   height: 630,
-  alt: "Lucas Regalado — Senior Full Stack Developer from Montevideo, Uruguay",
-} as const;
+  type: "image/png",
+  alt: title,
+});
 
 type LocalizedPaths = Record<Locale, string>;
 
@@ -65,6 +66,8 @@ const languageAlternates = (paths: LocalizedPaths) => ({
 interface MetadataInput {
   locale: Locale;
   paths: LocalizedPaths;
+  /** Name of the page's share card: a route key or a project slug. */
+  shareCard: string;
   title: string;
   description: string;
   keywords?: string[];
@@ -76,6 +79,7 @@ interface MetadataInput {
 const buildMetadata = ({
   locale,
   paths,
+  shareCard,
   title,
   description,
   keywords = [],
@@ -84,6 +88,7 @@ const buildMetadata = ({
 }: MetadataInput): Metadata => {
   const dictionary = getDictionary(locale);
   const fullTitle = absoluteTitle ? title : `${title} | ${author.name}`;
+  const images = [shareImage(shareCard, locale, fullTitle)];
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
@@ -97,11 +102,11 @@ const buildMetadata = ({
       title: fullTitle,
       description,
       url: paths[locale],
-      siteName: dictionary.meta.home.title,
+      siteName: author.name,
       type,
       locale: ogLocale[locale],
       alternateLocale: locales.filter((other) => other !== locale).map((other) => ogLocale[other]),
-      images: [shareImage],
+      images,
     },
     twitter: {
       card: "summary_large_image",
@@ -109,7 +114,7 @@ const buildMetadata = ({
       description,
       creator: twitterHandle,
       site: twitterHandle,
-      images: [shareImage],
+      images,
     },
   };
 };
@@ -126,6 +131,7 @@ export const buildPageMetadata = (route: RouteKey, locale: Locale): Metadata => 
   return buildMetadata({
     locale,
     paths: routePaths(route),
+    shareCard: route,
     title: meta.title,
     description: meta.description,
     keywords: meta.keywords,
@@ -139,6 +145,7 @@ export const buildProjectMetadata = (project: Project, locale: Locale): Metadata
   buildMetadata({
     locale,
     paths: { en: projectPath(project.slug, "en"), es: projectPath(project.slug, "es") },
+    shareCard: project.slug,
     title: `${project.title} · ${getDictionary(locale).meta.caseStudySuffix}`,
     description: project.summary,
     keywords: project.stack,
