@@ -196,7 +196,7 @@ const en: Dictionary = {
     caseStudySuffix: "Case Study",
   },
   hero: {
-    eyebrow: "Senior Full Stack Developer — Currently at Streaver",
+    eyebrow: "Full Stack Developer — Currently at Streaver",
     lead: (years) =>
       `I build web products that scale, and lately I let AI agents handle the routine around them. ${years} years shipping with React, Next.js and TypeScript for teams in the US, Europe and Uruguay.`,
     seeWork: "See my work",
@@ -212,7 +212,7 @@ const en: Dictionary = {
     "PostgreSQL",
     "AI Agents",
     "Claude Code",
-    "Senior Full Stack",
+    "Full Stack",
   ],
   onOff: {
     label: "On stack and off stack",
@@ -244,7 +244,7 @@ const en: Dictionary = {
   },
   closing: { eyebrow: "A project, a talk, an idea — or just to say hi", cta: "Let's talk" },
   footer: {
-    bio: "Senior Full Stack Developer from Montevideo, Uruguay. Currently building at",
+    bio: "Full Stack Developer from Montevideo, Uruguay. Currently building at",
     pages: "Pages",
     elsewhere: "Elsewhere",
     email: "Email",
@@ -253,7 +253,7 @@ const en: Dictionary = {
   about: {
     eyebrow: "About me — Pepe to friends",
     title: ["About", "Lucas"],
-    lead: "Senior full stack developer from Montevideo, Uruguay. Team player first, engineer right after.",
+    lead: "Full stack developer from Montevideo, Uruguay. Team player first, engineer right after.",
     stats: {
       years: "Years shipping",
       teams: "Teams",
@@ -396,7 +396,7 @@ const es: Dictionary = {
     caseStudySuffix: "Caso de estudio",
   },
   hero: {
-    eyebrow: "Desarrollador Full Stack Senior — Hoy en Streaver",
+    eyebrow: "Desarrollador Full Stack — Hoy en Streaver",
     lead: (years) =>
       `Construyo productos web que escalan y, últimamente, dejo que agentes de IA se ocupen de la rutina que los rodea. ${years} años entregando con React, Next.js y TypeScript para equipos de Estados Unidos, Europa y Uruguay.`,
     seeWork: "Ver mi trabajo",
@@ -412,7 +412,7 @@ const es: Dictionary = {
     "PostgreSQL",
     "Agentes de IA",
     "Claude Code",
-    "Full Stack Senior",
+    "Full Stack",
   ],
   onOff: {
     label: "On stack y off stack",
@@ -449,7 +449,7 @@ const es: Dictionary = {
   },
   closing: { eyebrow: "Un proyecto, una charla, una idea — o simplemente saludar", cta: "Hablemos" },
   footer: {
-    bio: "Desarrollador Full Stack Senior de Montevideo, Uruguay. Hoy construyendo en",
+    bio: "Desarrollador Full Stack de Montevideo, Uruguay. Hoy construyendo en",
     pages: "Páginas",
     elsewhere: "En otros lados",
     email: "Email",
@@ -458,7 +458,7 @@ const es: Dictionary = {
   about: {
     eyebrow: "Sobre mí — Pepe para los amigos",
     title: ["Sobre", "Lucas"],
-    lead: "Desarrollador full stack senior de Montevideo, Uruguay. Primero compañero de equipo, enseguida ingeniero.",
+    lead: "Desarrollador full stack de Montevideo, Uruguay. Primero compañero de equipo, enseguida ingeniero.",
     stats: {
       years: "Años entregando",
       teams: "Equipos",
