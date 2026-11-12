@@ -5,9 +5,9 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { author, defaultOgImageAlt } from "@/lib/seo/config";
+import { author, shareImage } from "@/lib/seo/config";
 
-export const alt = defaultOgImageAlt;
+export const alt = shareImage.alt;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

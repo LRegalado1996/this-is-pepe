@@ -1,176 +1,55 @@
 ---
-description: Design guidelines for consistent UI including colors, glassmorphism, typography, and layout patterns
+description: Design guidelines for the "Volt" visual system — colors, typography, layout and component patterns
 alwaysApply: true
 ---
 
-# Design Guidelines
+# Design Guidelines — Volt system
 
-This document establishes the visual design system for the project, ensuring consistency across all components and pages.
+The site's look is inspired by landonorris.com: giant condensed display type, calm
+green-tinted neutrals and one loud lime accent. Tokens live in `src/app/globals.css`.
 
-## Color Scale
+## Color tokens
 
-The project uses a warm, earthy color palette. Always use these semantic color tokens defined in `src/app/globals.css`:
+- `paper` (#f0f1e6): default page background
+- `paper-2` (#e3e5d3): secondary background for cards and alternate sections
+- `ink` (#15160f): text and the footer background
+- `moss` (#262a1d): dark contrast blocks (selected work, off stack, outcomes, mobile menu)
+- `volt` (#d4ff00): the single loud accent — never more than ~5% of a screen
+- `volt-dim` (#aec72e): the accent on light backgrounds (numbers, arrows, dots), where pure volt lacks contrast
+- `stone` (#b6b9a4): muted display type, such as the years in the career timeline
 
-### Primary Colors
-- `dark-primary` (#a99985): Darker beige, used for emphasis, borders, and hover states
-- `light-primary` (#f5f1ed): Light cream, used for backgrounds and content containers
-- `primary` (#dad2bc): Medium beige, used for hover effects and subtle backgrounds
+Rules:
 
-### Secondary & Tertiary Colors
-- `secondary` (#70798c): Muted blue-grey, used for titles and important text
-- `tertiary` (#252323): Almost black, used for body text and strong contrast
-
-### Usage Rules
-1. **Backgrounds**: Use `bg-light-primary` for main backgrounds, `bg-primary` for secondary backgrounds
-2. **Text**: Use `text-tertiary` for body text, `text-secondary` for headings
-3. **Borders**: Prefer `border-dark-primary` with `border-2` for definition
-4. **Interactive states**: Use `hover:bg-primary` or `hover:bg-dark-primary` for buttons and links
-
-## Glassmorphism
-
-Glassmorphism creates depth and visual interest while maintaining readability. Apply where appropriate to create an "animated and happy" feeling.
-
-### When to Use
-- Overlay elements on images or videos
-- Cards that need to feel elevated but not solid
-- Navigation elements that need to be prominent but not obtrusive
-- Call-to-action sections
-
-### Implementation Pattern
-```typescript
-className="backdrop-blur-md bg-light-primary/80 border-2 border-dark-primary/50"
-```
-
-### Key Properties
-- `backdrop-blur-md` or `backdrop-blur-lg`: Creates the frosted glass effect
-- Semi-transparent backgrounds: Use `/80` or `/90` opacity
-- Subtle borders: Use `/50` or `/60` opacity on border colors
-- Combine with `shadow-lg` for additional depth
-
-### Examples
-```typescript
-// Glass card
-<div className="backdrop-blur-md bg-light-primary/90 border-2 border-dark-primary/50 rounded-xl p-6 shadow-lg">
-  {/* Content */}
-</div>
-
-// Glass navigation
-<nav className="backdrop-blur-lg bg-dark-primary/85 sticky top-0 z-10">
-  {/* Nav items */}
-</nav>
-```
+1. Text is `ink` on paper and `paper` on moss/ink. Use opacity (`text-ink/85`, `text-paper/80`) for secondary text; keep it at `/70` or above for small text.
+2. Volt is for emphasis: one primary button per view, underlines, hover fills, key numbers on moss.
+3. Do not introduce new colors or gradients. No glassmorphism other than the sticky header.
 
 ## Typography
 
-### Font Families
-- **Headings**: Lora (serif) - for titles and subtitles
-- **Body**: DM Sans (sans-serif) - for all body text and UI elements
+- Display: Anton via the `font-display` class. Always uppercase and tight (handled in CSS). Use it for headlines, numbers and names — never for body copy.
+- Text: Mona Sans (`font-sans`, the default).
+- Sizes are fluid with `clamp()`: page heroes `clamp(3.4rem,12vw,9.5rem)`, section headings `clamp(2.6rem,7vw,5.5rem)`.
+- Eyebrows and labels: small, uppercase, wide tracking — use the `Eyebrow` component.
+- No emojis in the interface.
 
-### Type Scale
-- `text-xl md:text-2xl`: Main page titles (h1)
-- `text-lg`: Section subtitles (h2)
-- `text-sm`: UI elements, buttons, navigation
-- Default size: Body text and paragraphs
+## Layout
 
-### Font Weights
-- `font-bold`: Primary titles
-- `font-semibold`: Subtitles, emphasized text, button labels
-- `font-normal`: Body text (default)
+- Content width is `max-w-[1280px]` with `px-4`. Full-bleed color blocks wrap an inner container of that width.
+- Sections breathe: `py-20 md:py-28`.
+- Rows separated by hairlines (`border-t border-ink/15`) rather than boxed cards. Cards (`bg-paper-2 border border-ink/10 rounded-xl`) are for grids of peers, such as seasons and articles.
+- Mobile first; the navigation collapses into the full-screen menu below `lg`.
 
-### Always Use
-- `antialiased` on text elements for better rendering
-- `uppercase` for navigation items and buttons
+## Shared components (`src/components/ui`)
 
-## Border Radius
+- `PageHero`: eyebrow + display headline + lead, for every inner page
+- `SectionHeading`: two-line display heading
+- `Eyebrow`, `Chip`: labels and pills (both take `onDark` for moss blocks)
+- `Reveal`: fade-and-rise on scroll; keeps pages as Server Components
+- `CountUp`: animated numbers
+- `ClosingCta`: the "Let's talk" closing block on every page except Contact
 
-Consistent rounding creates a friendly, approachable aesthetic:
+## Content and tone
 
-- `rounded-full`: Pills, avatars, small buttons, and navigation items
-- `rounded-xl`: Cards, larger containers
-- `rounded-lg`: Medium buttons, form inputs
-
-## Spacing & Layout
-
-### Max Width
-- All content sections: `max-w-[1280px]`
-- Center with: `m-auto` or `flex items-center justify-center`
-
-### Padding
-- Pages: `p-4`
-- Cards: `p-4` or `p-6` for larger cards
-- Buttons: `py-2 px-4`
-- Compact buttons: `p-2`
-
-### Gaps
-- Tight spacing: `gap-1` or `gap-2`
-- Standard spacing: `gap-4`
-- Sections: `gap-8`
-
-## Interactive Elements
-
-### Transitions
-Always include smooth transitions for interactive states:
-```typescript
-className="transition-all hover:bg-primary"
-```
-
-### Hover States
-- Links: `hover:bg-primary`
-- Buttons: `hover:bg-dark-primary`
-- Icons: Maintain stroke-width consistency at `strokeWidth={1}`
-
-### Active States
-- Use `bg-light-primary font-semibold` for active navigation items
-- Combine with conditionals to show current state
-
-## Icons
-
-- Use **Lucide React** for all icons
-- Standard size: `size={20}`
-- Stroke width: `strokeWidth={1}` for consistency
-- Always include descriptive `aria-label` attributes
-
-## Accessibility
-
-1. **Semantic HTML**: Use appropriate HTML5 tags (header, main, section, nav)
-2. **ARIA labels**: Include `aria-label` on interactive elements, especially icon-only buttons
-3. **Contrast**: Maintain sufficient contrast between text and backgrounds
-4. **Focus states**: Ensure keyboard navigation is visible
-
-## Component Patterns
-
-### Cards with Borders
-```typescript
-<div className="bg-light-primary border-2 border-dark-primary rounded-xl p-4">
-  {/* Content */}
-</div>
-```
-
-### Pill Buttons
-```typescript
-<button className="py-2 px-4 rounded-full hover:bg-primary transition-all">
-  Label
-</button>
-```
-
-### Full-width Sections
-```typescript
-<section className="w-full max-w-[1280px] px-4">
-  {/* Content */}
-</section>
-```
-
-## Responsive Design
-
-- Mobile-first approach with Tailwind breakpoints
-- Use `md:` prefix for tablet/desktop styles
-- Hide non-essential text on mobile: `hidden md:block`
-- Stack on mobile, row on desktop: `flex-col md:flex-row`
-
-## Brand Personality
-
-The design should feel:
-- **Warm and approachable**: Through the earthy color palette
-- **Professional yet friendly**: Through balanced typography and spacing
-- **Animated and happy**: Through smooth transitions, glass effects, and interactive feedback
-- **Modern and clean**: Through generous whitespace and clear hierarchy
+- All copy lives in `src/content`, in English and Spanish. Never hardcode interface text in components.
+- The site presents Lucas; it does not pitch services. Keep calls to action low-key ("Let's talk").
+- Case studies describe projects generically (industry and region) and never name the client.

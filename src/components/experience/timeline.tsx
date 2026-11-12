@@ -5,24 +5,62 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { clsx } from 'clsx';
 import { ArrowUpRight, Minus, Plus } from 'lucide-react';
-import { formatDateRange } from '@/utils';
+import { formatSeasonYears, getJobs, type Job, type JobBlock } from '@/content/jobs';
+import { getDictionary } from '@/content/site';
+import { routePath, type Locale } from '@/lib/i18n/config';
+import { formatDateRange } from '@/lib/i18n/format-date-range';
 import { Chip } from '../ui/chip';
 import { Eyebrow } from '../ui/eyebrow';
 import { Reveal } from '../ui/reveal';
-import { formatSeasonYears } from './jobs-data';
-import type { JobStructure } from './types';
+
+const Block = ({ block, locale }: { block: JobBlock; locale: Locale }) => {
+  if (block.type === 'paragraph') {
+    return (
+      <p>
+        {block.text}
+        {block.link && (
+          <>
+            {' '}
+            <Link href={routePath(block.link.route, locale)} className="font-semibold underline underline-offset-4">
+              {block.link.label}
+            </Link>
+            .
+          </>
+        )}
+      </p>
+    );
+  }
+
+  return (
+    <div>
+      {block.intro && <p className="mb-3">{block.intro}</p>}
+      <ol className="flex flex-col gap-3 ml-4">
+        {block.items.map((item, i) => (
+          <li key={item.title}>
+            <h3 className="font-semibold text-ink mb-1">
+              {i + 1}. {item.title}
+            </h3>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+};
 
 interface RowProps {
-  job: JobStructure;
-  index: number;
+  job: Job;
+  locale: Locale;
   defaultOpen: boolean;
 }
 
-const TimelineRow = ({ job, index, defaultOpen }: RowProps) => {
+const TimelineRow = ({ job, locale, defaultOpen }: RowProps) => {
   const [open, setOpen] = useState(defaultOpen);
-  const panelId = `job-details-${index}`;
+  const { experience } = getDictionary(locale);
+  const panelId = `job-details-${job.id}`;
 
   return (
     <li className="border-t border-ink/15 last:border-b">
@@ -48,7 +86,7 @@ const TimelineRow = ({ job, index, defaultOpen }: RowProps) => {
                 </a>
               </h2>
               <p className="font-semibold text-ink mt-3">{job.role}</p>
-              <Eyebrow className="mt-2">{formatDateRange(job.startDates, job.endDates)}</Eyebrow>
+              <Eyebrow className="mt-2">{formatDateRange(job.startDate, job.endDate, locale)}</Eyebrow>
             </div>
 
             <button
@@ -58,7 +96,7 @@ const TimelineRow = ({ job, index, defaultOpen }: RowProps) => {
               aria-controls={panelId}
               className="inline-flex items-center gap-1.5 text-[0.7rem] uppercase tracking-[0.14em] font-bold border border-ink/30 rounded-full px-4 py-2 cursor-pointer transition-colors hover:bg-volt hover:border-volt"
             >
-              {open ? 'Less' : 'Details'}
+              {open ? experience.less : experience.details}
               {open ? <Minus size={14} aria-hidden /> : <Plus size={14} aria-hidden />}
             </button>
           </div>
@@ -73,12 +111,16 @@ const TimelineRow = ({ job, index, defaultOpen }: RowProps) => {
             )}
           >
             <div className={clsx('overflow-hidden', !open && 'invisible')}>
-              <div className="max-w-[68ch] text-ink/80 pt-6">{job.experiences}</div>
+              <div className="flex flex-col gap-4 max-w-[68ch] text-ink/80 pt-6">
+                {job.body.map((block, i) => (
+                  <Block key={i} block={block} locale={locale} />
+                ))}
+              </div>
             </div>
           </div>
 
           <ul className="flex flex-wrap gap-1.5 mt-6">
-            {job.skils.map((skill) => (
+            {job.skills.map((skill) => (
               <li key={skill}>
                 <Chip>{skill}</Chip>
               </li>
@@ -91,13 +133,13 @@ const TimelineRow = ({ job, index, defaultOpen }: RowProps) => {
 };
 
 interface Props {
-  jobs: JobStructure[];
+  locale: Locale;
 }
 
-export const Timeline = ({ jobs }: Props) => (
+export const Timeline = ({ locale }: Props) => (
   <ol>
-    {jobs.map((job, i) => (
-      <TimelineRow key={job.company.name} job={job} index={i} defaultOpen={i === 0} />
+    {getJobs(locale).map((job, i) => (
+      <TimelineRow key={job.id} job={job} locale={locale} defaultOpen={i === 0} />
     ))}
   </ol>
 );

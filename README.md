@@ -71,6 +71,21 @@ pnpm dev
 
 Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
+### Project structure
+
+- `src/content` – all the copy, in English and Spanish: interface text (`site.ts`), job history (`jobs.ts`), case studies (`projects.ts`), articles (`articles.ts`), about (`about.ts`) and testimonials (`testimonials.ts`)
+- `src/views` – one component per page, shared by both languages
+- `src/app/(en)` and `src/app/es` – the routes; English at the root, Spanish under `/es` with translated slugs (mapped in `src/lib/i18n/config.ts`)
+- `src/components` – UI building blocks
+- `src/lib/seo` – metadata, hreflang alternates and structured data
+
+### Environment variables
+
+Both are optional and set in Vercel:
+
+- `NEXT_PUBLIC_SITE_URL` – the public URL (for example `https://lucasregalado.com`); used for canonical URLs, the sitemap and social cards
+- `GOOGLE_SITE_VERIFICATION` – the verification token from Google Search Console
+
 ---
 
 Made with ❤️ in Montevideo, Uruguay
