@@ -17,7 +17,14 @@ export interface AboutContent {
   quote: { text: string; author: string; reflection: string };
 }
 
-const favoriteBands = ["Mota", "La Vela Puerca", "Trotsky Vengarán", "El Cuarteto de Nos", "Los Piojos"];
+const favoriteBands = [
+  "Mota",
+  "La Vela Puerca",
+  "Trotsky Vengarán",
+  "El Cuarteto de Nos",
+  "Buitres",
+  "4 Pesos de Propina",
+];
 
 const stackItems = {
   frontend: [
