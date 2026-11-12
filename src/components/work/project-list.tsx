@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { clsx } from 'clsx';
 import { ArrowUpRight } from 'lucide-react';
 import { Chip } from '@/components/ui/chip';
-import { Eyebrow } from '@/components/ui/eyebrow';
 import { Reveal } from '@/components/ui/reveal';
 import { getProjects } from '@/content/projects';
 import { getDictionary } from '@/content/site';
@@ -39,19 +38,14 @@ export const ProjectList = ({ locale, onDark = false }: Props) => {
                 {String(i + 1).padStart(2, '0')}
               </span>
 
-              <div>
-                <h3
-                  className={clsx(
-                    'font-display text-2xl md:text-4xl transition-colors',
-                    onDark ? 'group-hover:text-volt' : 'text-ink group-hover:text-moss'
-                  )}
-                >
-                  {project.title}
-                </h3>
-                <Eyebrow onDark={onDark} className="mt-3">
-                  {project.context}
-                </Eyebrow>
-              </div>
+              <h3
+                className={clsx(
+                  'font-display text-2xl md:text-4xl transition-colors',
+                  onDark ? 'group-hover:text-volt' : 'text-ink group-hover:text-moss'
+                )}
+              >
+                {project.title}
+              </h3>
 
               <div>
                 <p className={clsx('max-w-[56ch]', onDark ? 'text-paper/85' : 'text-ink/85')}>
