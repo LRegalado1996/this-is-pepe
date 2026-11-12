@@ -169,13 +169,18 @@ export const buildRootMetadata = (locale: Locale): Metadata => {
     creator: author.name,
     publisher: author.name,
     robots: { index: true, follow: true },
-    // Set GOOGLE_SITE_VERIFICATION in Vercel with the token from Search Console.
-    verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
+    // Set these in Vercel with the tokens from Search Console and Bing Webmaster Tools.
+    verification: {
+      google: process.env.GOOGLE_SITE_VERIFICATION,
+      ...(process.env.BING_SITE_VERIFICATION && {
+        other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION },
+      }),
+    },
   };
 };
 
 const personId = `${siteUrl}/#person`;
-const absoluteUrl = (path: string) => `${siteUrl}${path === "/" ? "" : path}`;
+export const absoluteUrl = (path: string) => `${siteUrl}${path === "/" ? "" : path}`;
 
 export const structuredData = {
   person(locale: Locale) {

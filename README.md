@@ -77,14 +77,15 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 - `src/views` – one component per page, shared by both languages
 - `src/app/(en)` and `src/app/es` – the routes; English at the root, Spanish under `/es` with translated slugs (mapped in `src/lib/i18n/config.ts`)
 - `src/components` – UI building blocks
-- `src/lib/seo` – metadata, hreflang alternates and structured data
+- `src/lib/seo` – metadata, hreflang alternates, structured data and the `llms.txt` / `llms-full.txt` builders (served at `/llms.txt`, `/llms-full.txt` and under `/es`)
 
 ### Environment variables
 
-Both are optional and set in Vercel:
+All are optional and set in Vercel:
 
 - `NEXT_PUBLIC_SITE_URL` – the public URL (for example `https://lucasregalado.com`); used for canonical URLs, the sitemap and social cards
 - `GOOGLE_SITE_VERIFICATION` – the verification token from Google Search Console
+- `BING_SITE_VERIFICATION` – the verification token from Bing Webmaster Tools (Bing's index also feeds ChatGPT search and Copilot)
 
 ---
 
