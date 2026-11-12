@@ -1,5 +1,6 @@
 /**
- * Job history data containing detailed work experience information.
+ * Job history data: the single source of truth for work experience. The home
+ * "Career Seasons" grid and the Experience timeline both read from here.
  */
 import Link from "next/link";
 import { JobStructure } from "./types";
@@ -9,6 +10,10 @@ const streaver: JobStructure = {
     name: "Streaver",
     url: "https://streaver.com/",
   },
+  role: "Full Stack Developer · AI-driven products",
+  summary:
+    "Building web applications with Next.js and PostgreSQL at a boutique agency focused on AI-driven products, and writing about working with AI agents.",
+  featuredSkills: ["Next.js", "PostgreSQL", "Drizzle", "AI agents"],
   startDates: new Date("2025-08-01"),
   endDates: null,
   experiences: (
@@ -26,6 +31,14 @@ const streaver: JobStructure = {
         I focus on creating scalable, efficient solutions that optimize internal processes and enhance 
         the user experience, contributing to a platform that encourages collaboration and growth within 
         the tech ecosystem.
+      </p>
+      <p>
+        I also write for Streaver&apos;s blog about how I work with AI agents: scheduled routines
+        that prepare my day and a crew of Claude Code subagents that take over repetitive work.{" "}
+        <Link href="/writing" className="font-semibold underline">
+          Read the articles
+        </Link>
+        .
       </p>
     </div>
   ),
@@ -49,6 +62,10 @@ const laOfertaIrresistible: JobStructure = {
     name: "La Oferta Irresistible",
     url: "https://loi.com.uy/",
   },
+  role: "Lead Frontend · e-commerce replatform",
+  summary:
+    "Led the front end of a nationwide e-commerce and its gradual migration from PHP to Next.js and TypeScript.",
+  featuredSkills: ["React", "Next.js", "TypeScript", "SEO"],
   startDates: new Date("2024-04-01"),
   endDates: new Date("2025-05-13"),
   experiences: (
@@ -116,8 +133,13 @@ const laOfertaIrresistible: JobStructure = {
 const medable: JobStructure = {
   company: {
     name: "Medable, Inc",
+    shortName: "Medable",
     url: "https://www.medable.com/",
   },
+  role: "Lead Backend → Frontend · clinical trials",
+  summary:
+    "Three stages on a US clinical-trials platform: reporting, leading a distributed backend team of five, then front end.",
+  featuredSkills: ["Node.js", "React", "MongoDB"],
   startDates: new Date("2021-06-01"),
   endDates: new Date("2023-11-10"),
   experiences: (
@@ -198,6 +220,10 @@ const onetree: JobStructure = {
     name: "Onetree",
     url: "https://www.onetree.com/",
   },
+  role: "Full Stack Developer · Reporting Framework",
+  summary:
+    "Full stack development in a large Scrum team, building the first custom reporting system of a clinical-trials platform.",
+  featuredSkills: ["React", "Node.js", "MongoDB"],
   startDates: new Date("2018-11-01"),
   endDates: new Date("2021-06-01"),
   experiences: (
@@ -240,8 +266,13 @@ const onetree: JobStructure = {
 const guataco: JobStructure = {
   company: {
     name: "Guataco - Influlocal",
+    shortName: "Guataco",
     url: "https://guataco.com/",
   },
+  role: "Developer · first startup",
+  summary:
+    "First full-time developer role: from an investor prototype to a full platform in Angular.",
+  featuredSkills: ["Angular", "Sass", "PHP"],
   startDates: new Date("2018-06-01"),
   endDates: new Date("2018-11-01"),
   experiences: (
@@ -270,8 +301,13 @@ const guataco: JobStructure = {
 const zureo: JobStructure = {
   company: {
     name: "Zureo Software",
+    shortName: "Zureo",
     url: "https://web.zureo.com/",
   },
+  role: "Support → Web · first steps",
+  summary:
+    "First job in IT: technical support for an ERP, and first steps in web development customizing online stores.",
+  featuredSkills: ["JavaScript", "jQuery", "CSS"],
   startDates: new Date("2016-07-01"),
   endDates: new Date("2017-12-01"),
   experiences: (
@@ -298,7 +334,18 @@ const zureo: JobStructure = {
       </p>
     </div>
   ),
-  skils: ["JavasScript", "JQuery", "CSS", "LESS", "HTML"],
+  skils: ["JavaScript", "JQuery", "CSS", "LESS", "HTML"],
 };
 
 export const jobsData: JobStructure[] = [streaver, laOfertaIrresistible, medable, onetree, guataco, zureo];
+
+export const careerStartYear = zureo.startDates.getUTCFullYear();
+
+/** Compact year label for a job: "2025 —", "2021 – 23" or "2018". */
+export const formatSeasonYears = (job: JobStructure): string => {
+  const start = job.startDates.getUTCFullYear();
+  if (!job.endDates) return `${start} —`;
+
+  const end = job.endDates.getUTCFullYear();
+  return end === start ? `${start}` : `${start} – ${String(end).slice(2)}`;
+};

@@ -6,7 +6,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { careerStartYear } from '@/components/about/data';
+import { careerStartYear } from '@/components/experience/jobs-data';
 
 const yearsInTheField = new Date().getFullYear() - careerStartYear;
 

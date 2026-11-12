@@ -3,44 +3,17 @@
  */
 import type { Metadata } from 'next';
 import { HomeContent } from './home-content';
-import {
-  openGraphImagePath,
-  primaryKeywords,
-  siteName,
-  siteTaglineEn,
-  siteTaglineEs,
-  siteUrl,
-} from '@/lib/seo/config';
-
-const pageTitle = 'Full Stack Developer in Uruguay | Lucas Regalado';
-const pageDescription = `${siteTaglineEn} ${siteTaglineEs}`;
+import { buildPageMetadata, siteName, siteTaglineEn } from '@/lib/seo/config';
 
 export const metadata: Metadata = {
-  title: pageTitle,
-  description: pageDescription,
-  keywords: [...primaryKeywords, 'portfolio', 'software engineer Montevideo'],
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    title: pageTitle,
-    description: pageDescription,
-    url: siteUrl,
-    siteName,
-    images: [
-      {
-        url: openGraphImagePath,
-        width: 800,
-        height: 800,
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: pageTitle,
-    description: pageDescription,
-    images: [openGraphImagePath],
-  },
+  ...buildPageMetadata({
+    title: 'Senior Full Stack Developer in Uruguay',
+    description: siteTaglineEn,
+    path: '/',
+    keywords: ['portfolio', 'software engineer Montevideo'],
+    type: 'profile',
+  }),
+  title: { absolute: siteName },
 };
 
 export default function HomePage() {

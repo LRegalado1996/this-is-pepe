@@ -1,6 +1,6 @@
 /**
  * Home hero: full-width display headline revealed line by line, color
- * portrait with a clip-path entrance, and the availability chip.
+ * portrait with a clip-path entrance, and links into the work and writing.
  */
 'use client';
 
@@ -8,7 +8,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin } from 'lucide-react';
-import { careerStartYear } from '@/components/about/data';
+import { author } from '@/lib/seo/config';
+import { careerStartYear } from '@/components/experience/jobs-data';
 
 const yearsInTheField = new Date().getFullYear() - careerStartYear;
 
@@ -43,7 +44,7 @@ export const Hero = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1, duration: 0.6 }}
       >
-        Senior Full Stack Developer — Montevideo, Uruguay
+        Senior Full Stack Developer — Currently at {author.employer.name}
       </motion.p>
 
       <div className="grid md:grid-cols-[1.5fr_1fr] gap-10 md:gap-14 items-end">
@@ -59,8 +60,9 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
-            I build web products that scale. {yearsInTheField} years shipping
-            with React, Next.js and TypeScript for teams in the US, Europe and
+            I build web products that scale, and lately I let AI agents handle
+            the routine around them. {yearsInTheField} years shipping with
+            React, Next.js and TypeScript for teams in the US, Europe and
             Uruguay.
           </motion.p>
 
@@ -71,10 +73,16 @@ export const Hero = () => {
             transition={{ delay: 0.75, duration: 0.6 }}
           >
             <Link
-              href="/contact"
+              href="/work-experience"
               className="inline-block bg-volt text-ink text-[0.7rem] uppercase tracking-[0.14em] font-bold rounded-full px-4 py-2 transition-transform hover:scale-[1.04]"
             >
-              Let&apos;s work together
+              See my work
+            </Link>
+            <Link
+              href="/writing"
+              className="inline-block border border-ink/30 text-[0.7rem] uppercase tracking-[0.14em] font-bold rounded-full px-4 py-2 transition-colors hover:bg-ink hover:text-paper"
+            >
+              Read my writing
             </Link>
             <span className="inline-flex items-center gap-1.5 border border-ink/30 text-[0.7rem] uppercase tracking-[0.14em] font-semibold rounded-full px-4 py-2">
               <MapPin size={13} strokeWidth={1.75} />

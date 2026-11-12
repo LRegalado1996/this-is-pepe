@@ -1,13 +1,16 @@
 /**
  * Home composition: hero, skills marquee, the pinned On Stack / Off Stack
- * horizontal track, career seasons, brand callout and the contact CTA.
+ * horizontal track, career seasons, selected work, writing, brand callout
+ * and the closing call to action.
  */
+import { ClosingCta } from '@/components/ui/closing-cta';
 import { Marquee } from '@/components/ui/marquee';
 import { Hero } from './sections/hero';
 import { OnOffStack } from './sections/on-off-stack';
 import { Seasons } from './sections/seasons';
+import { SelectedWork } from './sections/selected-work';
+import { WritingPreview } from './sections/writing-preview';
 import { Callout } from './sections/callout';
-import { ContactCta } from './sections/contact-cta';
 
 const marqueeItems = [
   'React',
@@ -15,7 +18,8 @@ const marqueeItems = [
   'TypeScript',
   'Node.js',
   'PostgreSQL',
-  'MongoDB',
+  'AI Agents',
+  'Claude Code',
   'Senior Full Stack',
 ];
 
@@ -26,8 +30,10 @@ export const HomeContent = () => {
       <Marquee items={marqueeItems} />
       <OnOffStack />
       <Seasons />
+      <SelectedWork />
+      <WritingPreview />
       <Callout />
-      <ContactCta />
+      <ClosingCta />
     </>
   );
 };

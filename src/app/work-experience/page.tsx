@@ -1,71 +1,37 @@
 /**
- * Work Experience page highlighting Lucas Regalado's professional history and responsibilities.
+ * Work Experience page: the full career timeline, season by season.
  */
-import type { Metadata } from "next";
-import { Title, FormalExperience } from "@/components";
-import {
-  openGraphImagePath,
-  primaryKeywords,
-  siteName,
-  siteTaglineEn,
-  siteUrl,
-} from "@/lib/seo/config";
+import type { Metadata } from 'next';
+import { careerStartYear, jobsData } from '@/components/experience/jobs-data';
+import { Timeline } from '@/components/experience/timeline';
+import { ClosingCta } from '@/components/ui/closing-cta';
+import { PageHero } from '@/components/ui/page-hero';
+import { buildPageMetadata } from '@/lib/seo/config';
 
-const pageTitle = "Lucas Regalado | Work Experience";
-const pageDescription = `${siteTaglineEn} Review the professional journey across Streaver, LOi, Medable, and more.`;
-
-export const metadata: Metadata = {
-  title: pageTitle,
-  description: pageDescription,
-  keywords: [...primaryKeywords, "work experience", "Lucas Regalado resume"],
-  alternates: {
-    canonical: "/work-experience",
-  },
-  openGraph: {
-    title: pageTitle,
-    description: pageDescription,
-    url: `${siteUrl}/work-experience`,
-    siteName,
-    type: "profile",
-    images: [
-      {
-        url: openGraphImagePath,
-        width: 800,
-        height: 800,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: pageTitle,
-    description: pageDescription,
-    images: [openGraphImagePath],
-  },
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Work Experience',
+  description:
+    'The professional journey of Lucas Regalado, senior full stack developer: from tech support in 2016 to leading teams and building AI-driven products with React, Next.js and Node.js.',
+  path: '/work-experience',
+  keywords: ['work experience', 'Lucas Regalado resume'],
+  type: 'profile',
+});
 
 export default function WorkExperiencePage() {
   return (
-    <div className="w-full max-w-[1280px] p-4">
-      <Title className="mb-4">Professional Experience</Title>
+    <>
+      <PageHero eyebrow={`Work experience — ${careerStartYear} to today`} lines={['Career', 'Seasons']}>
+        <p>
+          From installing invoicing systems to leading distributed teams and building AI-driven
+          products. Every season taught me something I still use.
+        </p>
+      </PageHero>
 
-      <FormalExperience />
-      {/* <ul className="p-4 bg-primary flex flex-col gap-2 ">
-        <li>
-          <div className="p-4">
-            <Subtitle className="mb-4 text-dark-primary">
-              1. Formal work experience
-            </Subtitle>
-            <ul className="p-4 bg-light-primary flex flex-col gap-2 ">
-              <li>1. Loi</li>
-              <li>2. Onetree-Medable</li>
-              <li>3. Guataco</li>
-              <li>4. Zureo</li>
-            </ul>
-          </div>
-        </li>
-        <li>2. Christmas Fair</li>
-        <li>3. Pepe Shop</li>
-      </ul> */}
-    </div>
+      <section className="w-full max-w-[1280px] px-4">
+        <Timeline jobs={jobsData} />
+      </section>
+
+      <ClosingCta />
+    </>
   );
 }

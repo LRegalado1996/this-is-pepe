@@ -3,16 +3,16 @@
  */
 import type { Metadata } from "next";
 import { Anton, Mona_Sans } from "next/font/google";
-import { Header } from "@/components";
+import { Analytics } from "@vercel/analytics/next";
+import { Footer } from "@/components/ui/footer";
+import { Header } from "@/components/ui/header/header";
 import { SmoothScroll } from "@/components/ui/smooth-scroll";
 import {
   author,
-  defaultOgImageAlt,
-  openGraphImagePath,
   primaryKeywords,
+  shareImage,
   siteName,
   siteTaglineEn,
-  siteTaglineEs,
   siteUrl,
   socialProfiles,
   structuredData,
@@ -44,9 +44,6 @@ export const metadata: Metadata = {
   authors: [{ name: author.name, url: siteUrl }],
   creator: author.name,
   publisher: author.name,
-  alternates: {
-    canonical: siteUrl,
-  },
   robots: {
     index: true,
     follow: true,
@@ -54,19 +51,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteName,
     description: siteTaglineEn,
-    url: siteUrl,
+    url: "/",
     siteName,
     type: "website",
     locale: "en_US",
-    alternateLocale: ["es_UY"],
-    images: [
-      {
-        url: openGraphImagePath,
-        width: 800,
-        height: 800,
-        alt: defaultOgImageAlt,
-      },
-    ],
+    images: [shareImage],
   },
   twitter: {
     card: "summary_large_image",
@@ -74,13 +63,7 @@ export const metadata: Metadata = {
     description: siteTaglineEn,
     creator: "@lucasregalado5",
     site: "@lucasregalado5",
-    images: [openGraphImagePath],
-  },
-  other: {
-    "description:es": siteTaglineEs,
-  },
-  icons: {
-    icon: "/favicon.ico",
+    images: [shareImage],
   },
 };
 
@@ -92,7 +75,7 @@ export default function RootLayout({
   const jsonLd = [structuredData.person(), structuredData.website()];
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${displayFont.variable} ${textFont.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -107,12 +90,14 @@ export default function RootLayout({
         <link rel="me" href={socialProfiles.instagram} />
       </head>
       <body
-        className={`${displayFont.variable} ${textFont.variable} font-sans antialiased flex flex-col items-center justify-center min-w-svw min-h-dvh bg-paper text-ink`}
+        className="font-sans antialiased flex flex-col items-center justify-center min-w-svw min-h-dvh bg-paper text-ink"
       >
         <SmoothScroll />
         <Header />
 
         <main className="flex-1 w-full flex flex-col items-center">{children}</main>
+        <Footer />
+        <Analytics />
       </body>
     </html>
   );

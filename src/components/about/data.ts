@@ -1,42 +1,45 @@
 /**
- * Static data for the About Me page including badges, interests, stack, and inspirational quotes.
+ * Static content for the About page: bio, working principles, stack,
+ * life outside work and the closing quote.
  */
 
-export interface Badge {
-  label: string;
-  color: string;
-}
-
-export interface Company {
-  name: string;
-  logo: string;
-  period: string;
-  current?: boolean;
-}
-
-export const badges: Badge[] = [
-  { label: "Build with ❤️", color: "red" },
-  { label: "Open to Collaboration", color: "blue" },
-  { label: "Learning Never Stops", color: "forestgreen" },
-  { label: "Made in Uruguay", color: "ffcc00" },
+export const aboutDescription = [
+  "I give 100% to my team and love achieving goals together. Throughout my career I have worked in very different environments, from relaxed, creative teams to deadline-driven ones, and I adapt quickly to what the context needs. I am comfortable building with sparse requirements or executing against highly detailed specs.",
+  "I care deeply about the human side: helping, including, and lifting people up. I keep a positive, collaborative attitude and I never hesitate to roll up my sleeves and do the work.",
+  "These days I build AI-driven products at Streaver, and I write about what I learn putting AI agents to work on the routine around the code.",
 ];
 
-export const interests = [
-  "Helping turn ideas into real products.",
-  "Mentoring, teaching, and learning in a community.",
-  "Creating projects with a human-centered, simple, and sustainable approach.",
+export interface Principle {
+  title: string;
+  description: string;
+}
+
+export const principles: Principle[] = [
+  {
+    title: "Ideas into products",
+    description:
+      "I enjoy helping turn an idea into something real that people use, from the first prototype to the version that scales.",
+  },
+  {
+    title: "Learning in community",
+    description:
+      "Mentoring, teaching and learning with others. Leading a distributed team taught me that unblocking people is the fastest way to ship.",
+  },
+  {
+    title: "Human-centered, simple, sustainable",
+    description:
+      "Projects built for the people who use and maintain them. Simple enough to understand, solid enough to last.",
+  },
 ];
 
 export interface StackCategory {
   title: string;
   items: string[];
-  emoji: string;
 }
 
 export const stackCategories: StackCategory[] = [
   {
     title: "Frontend",
-    emoji: "🎨",
     items: [
       "React.js",
       "Next.js",
@@ -52,7 +55,6 @@ export const stackCategories: StackCategory[] = [
   },
   {
     title: "Backend",
-    emoji: "⚙️",
     items: [
       "Node.js",
       "NestJS",
@@ -65,61 +67,21 @@ export const stackCategories: StackCategory[] = [
     ],
   },
   {
+    title: "AI & Agents",
+    items: ["Claude Code", "Subagents", "Scheduled routines", "Cursor", "Prompt design"],
+  },
+  {
     title: "Tools & Platforms",
-    emoji: "🛠️",
-    items: [
-      "Git",
-      "GitHub",
-      "GitLab",
-      "Vercel",
-      "Cursor",
-      "VS Code",
-      "npm",
-      "Yarn",
-      "pnpm",
-      "Webpack",
-    ],
+    items: ["Git", "GitHub", "GitLab", "Vercel", "VS Code", "pnpm", "Webpack"],
   },
   {
-    title: "Testing & Quality",
-    emoji: "✅",
-    items: [
-      "Jest",
-      "ESLint",
-      "Prettier",
-      "TypeScript",
-    ],
+    title: "Quality & Performance",
+    items: ["Jest", "ESLint", "Code Review", "Web Vitals", "SEO", "Code Splitting"],
   },
   {
-    title: "Methodologies & Practices",
-    emoji: "📋",
-    items: [
-      "Agile",
-      "Scrum",
-      "Jira",
-      "Confluence",
-      "Code Review",
-      "Clean Code",
-    ],
+    title: "Ways of working",
+    items: ["Agile", "Scrum", "Jira", "Confluence", "Clean Code"],
   },
-  {
-    title: "Performance & Optimization",
-    emoji: "🚀",
-    items: [
-      "SEO",
-      "Lazy Loading",
-      "Code Splitting",
-      "Web Vitals",
-      "Performance Optimization",
-    ],
-  },
-];
-
-export const currentlyDoing = [
-  "👨‍💻 Working at Streaver.",
-  "💡 Exploring new ideas and personal projects.",
-  "🧠 Learning and sharing what inspires me.",
-  "🤝 Collaborating with other creators to build useful, purposeful things.",
 ];
 
 export const inspirationalQuote = {
@@ -127,72 +89,35 @@ export const inspirationalQuote = {
   author: "Julia Navarro",
 };
 
-export const aboutDescription = [
-  "I give 100% to my team and love achieving goals together. Throughout my career I have worked in very different environments—from relaxed, creative teams to deadline‑driven ones—and I adapt quickly to what the context needs. I am comfortable building with sparse requirements or executing against highly detailed specs. I care deeply about the human side: helping, including, and lifting people up. I keep a positive, collaborative attitude and I never hesitate to roll up my sleeves and do the work.",
-];
-
-export const companies: Company[] = [
-  {
-    name: "Streaver",
-    logo: "/images/companies/streaver.jpeg",
-    period: "Aug 2024 - Present",
-    current: true,
-  },
-  {
-    name: "La Oferta Irresistible",
-    logo: "/images/companies/loi.jpeg",
-    period: "Apr 2024 - Aug 2024",
-  },
-  {
-    name: "Medable, Inc",
-    logo: "/images/companies/medable.jpeg",
-    period: "Jun 2021 - Nov 2023",
-  },
-  {
-    name: "Onetree",
-    logo: "/images/companies/onetree.jpeg",
-    period: "Nov 2018 - Jun 2021",
-  },
-  {
-    name: "Zureo Software",
-    logo: "/images/companies/zureo.jpeg",
-    period: "Jul 2016 - Dec 2017",
-  },
-];
-
-export const careerStartYear = 2016;
-
 export interface Hobby {
   id: string;
   title: string;
-  icon: string;
   description: string;
 }
 
 export const hobbies: Hobby[] = [
   {
+    id: "family",
+    title: "Fatherhood",
+    description:
+      "Proud dad learning empathy, patience and creativity every day. Most afternoons you'll find me at my daughter's artistic skating classes.",
+  },
+  {
     id: "football",
-    title: "Football Lover ⚽",
-    icon: "trophy",
-    description: "Passionate supporter of Club Nacional de Football, the biggest club in Uruguay 🇺🇾. Love watching our team's matches, plus following Premier League, La Liga, and Bundesliga games with my family.",
+    title: "Nacional",
+    description:
+      "Passionate supporter of Club Nacional de Football. We watch every match, plus Premier League, La Liga and Bundesliga with the family.",
   },
   {
     id: "f1",
-    title: "Formula 1 🏎️",
-    icon: "flag",
-    description: "Started watching F1 in late 2024. Don't understand much yet, but we enjoy it every race weekend, especially Saturday and Sunday mornings. Fun fact: when overtaking cars on the road, I call myself Max Verstappen!",
-  },
-  {
-    id: "family",
-    title: "Fatherhood 👨‍👧",
-    icon: "heart",
-    description: "Proud dad learning empathy, patience, and creativity every day. My weekly hobby has become accompanying my daughter to her artistic skating classes, which happen almost every afternoon.",
+    title: "Formula 1",
+    description:
+      "Hooked since late 2024. Still learning the rules, never missing a race weekend. When I overtake on the road, I'm Max Verstappen.",
   },
   {
     id: "music",
-    title: "Favorite Bands 🎸",
-    icon: "music",
-    description: "My soundtrack for coding and life",
+    title: "Uruguayan rock",
+    description: "The soundtrack for coding and for life, always with a mate within reach.",
   },
 ];
 
@@ -203,41 +128,3 @@ export const favoriteBands = [
   "El Cuarteto de Nos",
   "Los Piojos",
 ];
-
-export interface FeaturedProject {
-  id: string;
-  title: string;
-  company: string;
-  description: string;
-  highlights: string[];
-  link?: string;
-  isExternal?: boolean;
-}
-
-export const featuredProjects: FeaturedProject[] = [
-  {
-    id: "loiplay",
-    title: "LOiPlay",
-    company: "La Oferta Irresistible",
-    description: "A TikTok-inspired browsing experience for e-commerce, showcasing products through short, dynamic videos.",
-    highlights: [
-      "Fast video playback with audio support across all browsers",
-      "Add to cart, favorites, likes, and share features",
-      "Focus on user engagement and conversion",
-    ],
-    link: "https://loi.com.uy/loiplay",
-    isExternal: true,
-  },
-  {
-    id: "reporting-framework",
-    title: "Reporting Framework",
-    company: "Medable, Inc (via Onetree)",
-    description: "Medable's first custom reporting system for clinical trials, allowing users to view reports online and download data.",
-    highlights: [
-      "Extracted data without modifying core database collections",
-      "Reduced operating costs for clinical studies",
-      "Dynamic report generation using Node.js scripts",
-    ],
-  },
-];
-

@@ -6,10 +6,10 @@
 import Link from 'next/link';
 import { clsx } from 'clsx';
 import { usePathname } from 'next/navigation';
-import type { PagesType } from './types';
+import type { NavPage } from '../navigation';
 
 interface Props {
-  page: PagesType;
+  page: NavPage;
 }
 
 export const HeaderLink = ({ page }: Props) => {

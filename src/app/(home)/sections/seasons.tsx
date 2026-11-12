@@ -7,52 +7,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-
-interface Season {
-  years: string;
-  company: string;
-  role: string;
-  skills: string[];
-}
-
-const seasons: Season[] = [
-  {
-    years: '2025 —',
-    company: 'Streaver',
-    role: 'Full Stack Developer · AI-driven products',
-    skills: ['Next.js', 'PostgreSQL', 'Drizzle', 'Vercel'],
-  },
-  {
-    years: '2024 – 25',
-    company: 'La Oferta Irresistible',
-    role: 'Lead Frontend · e-commerce replatform',
-    skills: ['React', 'Next.js', 'TypeScript', 'SEO'],
-  },
-  {
-    years: '2021 – 23',
-    company: 'Medable',
-    role: 'Lead Backend → Frontend · clinical trials',
-    skills: ['Node.js', 'React', 'MongoDB'],
-  },
-  {
-    years: '2018 – 21',
-    company: 'Onetree',
-    role: 'Full Stack Developer · Reporting Framework',
-    skills: ['React', 'Node.js', 'MongoDB'],
-  },
-  {
-    years: '2018',
-    company: 'Guataco',
-    role: 'Developer · first startup',
-    skills: ['Angular', 'Sass', 'PHP'],
-  },
-  {
-    years: '2016 – 17',
-    company: 'Zureo',
-    role: 'Support → Web · first steps',
-    skills: ['JavaScript', 'jQuery', 'CSS'],
-  },
-];
+import { formatSeasonYears, jobsData } from '@/components/experience/jobs-data';
 
 export const Seasons = () => {
   return (
@@ -73,9 +28,9 @@ export const Seasons = () => {
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {seasons.map((season, i) => (
+        {jobsData.map((job, i) => (
           <motion.div
-            key={season.company}
+            key={job.company.name}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
@@ -86,12 +41,14 @@ export const Seasons = () => {
               className="group block h-full bg-paper-2 border border-ink/10 rounded-xl p-6 transition-all duration-200 hover:-translate-y-1 hover:border-volt-dim hover:shadow-[0_8px_30px_rgba(21,22,15,0.08)]"
             >
               <p className="font-display text-3xl md:text-4xl text-stone group-hover:text-volt-dim transition-colors">
-                {season.years}
+                {formatSeasonYears(job)}
               </p>
-              <h3 className="font-display text-xl md:text-2xl text-ink mt-3">{season.company}</h3>
-              <p className="text-sm text-ink/70 mt-1">{season.role}</p>
+              <h3 className="font-display text-xl md:text-2xl text-ink mt-3">
+                {job.company.shortName ?? job.company.name}
+              </h3>
+              <p className="text-sm text-ink/70 mt-1">{job.role}</p>
               <div className="flex flex-wrap gap-1.5 mt-4">
-                {season.skills.map((skill) => (
+                {job.featuredSkills.map((skill) => (
                   <span
                     key={skill}
                     className="text-[0.62rem] uppercase tracking-[0.1em] font-bold text-moss/80 border border-ink/15 rounded-full px-2.5 py-1"
