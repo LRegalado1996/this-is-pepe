@@ -7,6 +7,7 @@
 
 import { useId, useState } from 'react';
 import { clsx } from 'clsx';
+import { ChevronDown } from 'lucide-react';
 import { getDictionary } from '@/content/site';
 import type { Locale } from '@/lib/i18n/config';
 import { author, socialProfiles } from '@/lib/seo/config';
@@ -72,16 +73,22 @@ export const MessageForm = ({ locale }: Props) => {
           <label htmlFor={`${id}-topic`} className={labelClass}>
             {form.topic}
           </label>
-          <select
-            id={`${id}-topic`}
-            value={topic}
-            onChange={(event) => setTopic(event.target.value)}
-            className={fieldClass}
-          >
-            {form.topics.map((option) => (
-              <option key={option}>{option}</option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              id={`${id}-topic`}
+              value={topic}
+              onChange={(event) => setTopic(event.target.value)}
+              className={clsx(fieldClass, 'appearance-none pr-12 cursor-pointer')}
+            >
+              {form.topics.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </select>
+            <ChevronDown
+              aria-hidden
+              className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-ink/60"
+            />
+          </div>
         </div>
       </div>
 
