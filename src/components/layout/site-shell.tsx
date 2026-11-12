@@ -30,6 +30,7 @@ export const SiteShell = ({ locale, children }: Props) => {
         <meta name="geo.position" content="-34.9011;-56.1645" />
         <meta name="ICBM" content="-34.9011, -56.1645" />
         <link rel="me" href={socialProfiles.linkedin} />
+        <link rel="me" href={socialProfiles.github} />
         <link rel="me" href={socialProfiles.twitter} />
         <link rel="me" href={socialProfiles.instagram} />
       </head>

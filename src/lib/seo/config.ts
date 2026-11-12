@@ -37,6 +37,7 @@ export const author = {
 
 export const socialProfiles = {
   linkedin: "https://www.linkedin.com/in/lucas-regalado",
+  github: "https://github.com/LRegalado1996",
   whatsapp: "https://wa.me/59891475727",
   instagram: "https://www.instagram.com/lucas.regalado18",
   twitter: "https://x.com/lucasregalado5",
@@ -220,7 +221,12 @@ export const structuredData = {
         "SEO",
       ],
       knowsLanguage: ["en", "es"],
-      sameAs: [socialProfiles.linkedin, socialProfiles.twitter, socialProfiles.instagram],
+      sameAs: [
+        socialProfiles.linkedin,
+        socialProfiles.github,
+        socialProfiles.twitter,
+        socialProfiles.instagram,
+      ],
     };
   },
   website(locale: Locale) {

@@ -101,6 +101,7 @@ const header = (locale: Locale): string => {
     `- ${text.nickname}: Pepe`,
     `- ${text.website}: ${absoluteUrl(routePath("home", locale))}`,
     `- LinkedIn: ${socialProfiles.linkedin}`,
+    `- GitHub: ${socialProfiles.github}`,
     `- Email: ${author.email}`,
   ].join("\n");
 };
@@ -255,6 +256,7 @@ export const buildLlmsFull = (locale: Locale): string => {
     "",
     `- Email: ${author.email}`,
     `- LinkedIn: ${socialProfiles.linkedin}`,
+    `- GitHub: ${socialProfiles.github}`,
     `- X: ${socialProfiles.twitter}`,
     link(text.callLink, routePath("contact", locale)),
   ]);

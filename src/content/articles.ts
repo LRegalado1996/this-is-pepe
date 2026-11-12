@@ -22,6 +22,20 @@ interface ArticleSource extends Omit<Article, "summary" | "topics"> {
 
 const sources: ArticleSource[] = [
   {
+    title: "How to Build a Claude Code Plugin for Your Whole Engineering Team",
+    url: "https://streaver.com/insights/blogs/claude-code-plugin-for-teams",
+    publisher: "Streaver",
+    publishedAt: "2026-11-12",
+    summary: {
+      en: "A zip of agents shared in Slack grew into a Claude Code plugin the whole team installs with one script and updates with git pull: shared rules, seven subagents and four workflows in five weeks.",
+      es: "Un zip de agentes compartido por Slack creció hasta ser un plugin de Claude Code que todo el equipo instala con un script y actualiza con git pull: reglas compartidas, siete subagentes y cuatro workflows en cinco semanas.",
+    },
+    topics: {
+      en: ["Claude Code", "Plugins", "Teams"],
+      es: ["Claude Code", "Plugins", "Equipos"],
+    },
+  },
+  {
     title: "How to Reduce Claude Code Token Usage: The Cheapest Model That Does the Job",
     url: "https://streaver.com/insights/blogs/reduce-claude-code-token-usage",
     publisher: "Streaver",

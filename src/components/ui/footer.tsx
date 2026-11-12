@@ -22,6 +22,7 @@ export const Footer = ({ locale }: Props) => {
 
   const socials = [
     { name: 'LinkedIn', href: socialProfiles.linkedin },
+    { name: 'GitHub', href: socialProfiles.github },
     { name: 'X', href: socialProfiles.twitter },
     { name: 'Instagram', href: socialProfiles.instagram },
     { name: footer.email, href: socialProfiles.email },

@@ -8,6 +8,7 @@ import { Reveal } from '../ui/reveal';
 const channels = [
   { label: 'Email', value: author.email, href: socialProfiles.email },
   { label: 'LinkedIn', value: 'in/lucas-regalado', href: socialProfiles.linkedin },
+  { label: 'GitHub', value: 'LRegalado1996', href: socialProfiles.github },
   { label: 'WhatsApp', value: '+598 91 475 727', href: socialProfiles.whatsapp },
   { label: 'X', value: '@lucasregalado5', href: socialProfiles.twitter },
   { label: 'Instagram', value: '@lucas.regalado18', href: socialProfiles.instagram },

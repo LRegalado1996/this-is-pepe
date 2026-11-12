@@ -16,6 +16,7 @@ interface Props {
 
 const socials = [
   { name: 'LinkedIn', href: socialProfiles.linkedin },
+  { name: 'GitHub', href: socialProfiles.github },
   { name: 'X', href: socialProfiles.twitter },
   { name: 'Instagram', href: socialProfiles.instagram },
 ];

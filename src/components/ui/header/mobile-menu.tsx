@@ -26,6 +26,7 @@ const menuRoutes: RouteKey[] = ['home', ...navRoutes];
 
 const socials = [
   { name: 'LinkedIn', href: socialProfiles.linkedin },
+  { name: 'GitHub', href: socialProfiles.github },
   { name: 'X', href: socialProfiles.twitter },
   { name: 'Instagram', href: socialProfiles.instagram },
 ];
