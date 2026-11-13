@@ -285,7 +285,9 @@ export const buildLlmsFull = (locale: Locale): string => {
     ]),
     section(
       dictionary.writing.communityEyebrow,
-      getCommunityItems(locale).map((item) => `- **${item.title}**: ${item.description}`),
+      getCommunityItems(locale).map(
+        (item) => `- **${item.title}**: ${item.description} [${dictionary.writing.seePost}](${item.url})`
+      ),
       3
     ),
   ]);

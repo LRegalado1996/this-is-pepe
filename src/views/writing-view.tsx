@@ -111,12 +111,20 @@ export const WritingView = ({ locale }: Props) => {
           <ul className="grid md:grid-cols-3 gap-4 mt-6">
             {getCommunityItems(locale).map((item, i) => (
               <li key={item.title} className="h-full">
-                <Reveal
-                  delay={i * 0.08}
-                  className="h-full bg-paper-2 border border-ink/10 rounded-xl p-6 md:p-8"
-                >
-                  <h3 className="font-display text-xl md:text-2xl text-ink">{item.title}</h3>
-                  <p className="text-ink/80 mt-3">{item.description}</p>
+                <Reveal delay={i * 0.08} className="h-full">
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col h-full bg-paper-2 border border-ink/10 rounded-xl p-6 md:p-8 transition-all duration-200 hover:-translate-y-1 hover:border-volt-dim hover:shadow-[0_8px_30px_rgba(21,22,15,0.08)]"
+                  >
+                    <h3 className="font-display text-xl md:text-2xl text-ink">{item.title}</h3>
+                    <p className="text-ink/80 mt-3">{item.description}</p>
+                    <span className={`${talkLink} mt-auto pt-6`}>
+                      <span className="border-b-[3px] border-volt pb-1">{writing.seePost}</span>
+                      <ArrowUpRight size={16} className={talkLinkArrow} aria-hidden />
+                    </span>
+                  </a>
                 </Reveal>
               </li>
             ))}

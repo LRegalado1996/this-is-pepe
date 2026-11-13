@@ -23,6 +23,8 @@ export interface Talk {
 export interface CommunityItem {
   title: string;
   description: string;
+  /** Lucas's own LinkedIn post from the event. */
+  url: string;
 }
 
 interface TalkSource extends Omit<Talk, "description"> {
@@ -32,6 +34,7 @@ interface TalkSource extends Omit<Talk, "description"> {
 interface CommunityItemSource {
   title: Record<Locale, string>;
   description: Record<Locale, string>;
+  url: string;
 }
 
 const talkSources: TalkSource[] = [
@@ -53,6 +56,7 @@ const talkSources: TalkSource[] = [
 const communitySources: CommunityItemSource[] = [
   {
     title: { en: "OWU Conf", es: "OWU Conf" },
+    url: "https://www.linkedin.com/feed/update/urn:li:activity:7525914841300131840/",
     description: {
       en: "Uruguay's open-space tech conference: nobody arrives with an agenda, whoever has a topic pitches it in 30 seconds and leads the session. At the 2026 edition, more than half of the 29 sessions were about AI.",
       es: "La conferencia de espacio abierto de la comunidad tecnológica uruguaya: nadie llega con agenda, quien tiene un tema lo propone en 30 segundos y lidera la sesión. En la edición 2026, más de la mitad de las 29 sesiones fueron sobre IA.",
@@ -60,6 +64,7 @@ const communitySources: CommunityItemSource[] = [
   },
   {
     title: { en: "IT Builders Live", es: "IT Builders Live" },
+    url: "https://www.linkedin.com/feed/update/urn:li:activity:7503066314555650049/",
     description: {
       en: "At the 2026 edition at Antel Arena with the Streaver crew, around a stand game built with Claude Code during two internal hackathons.",
       es: "En la edición 2026 en el Antel Arena con el equipo de Streaver, alrededor de un juego para el stand construido con Claude Code durante dos hackathons internas.",
@@ -67,6 +72,7 @@ const communitySources: CommunityItemSource[] = [
   },
   {
     title: { en: "Streaver hackathons", es: "Hackathons de Streaver" },
+    url: "https://www.linkedin.com/feed/update/urn:li:activity:7462173317030924289/",
     description: {
       en: "An internal hackathon every two months: one day, problems picked from real life, and projects running in production before the day ends.",
       es: "Una hackathon interna cada dos meses: un día, problemas sacados de la vida real y proyectos corriendo en producción antes de que termine la jornada.",
@@ -81,4 +87,5 @@ export const getCommunityItems = (locale: Locale): CommunityItem[] =>
   communitySources.map((item) => ({
     title: item.title[locale],
     description: item.description[locale],
+    url: item.url,
   }));
