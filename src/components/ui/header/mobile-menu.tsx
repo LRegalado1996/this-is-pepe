@@ -1,7 +1,8 @@
 /**
  * Full-screen mobile navigation: moss overlay with display-size links.
  * Rendered outside the header because the header's backdrop filter would
- * otherwise become the containing block of this fixed overlay.
+ * otherwise become the containing block of this fixed overlay. Its z-index
+ * must stay above page content (z-10 at most) and below the header (z-20).
  */
 'use client';
 
@@ -60,7 +61,7 @@ export const MobileMenu = ({ locale, open, onClose }: Props) => {
           aria-modal="true"
           aria-label={nav.menu}
           data-lenis-prevent
-          className="fixed inset-0 z-10 bg-moss text-paper lg:hidden flex flex-col justify-between px-4 pt-24 pb-8 overflow-y-auto"
+          className="fixed inset-0 z-[15] bg-moss text-paper lg:hidden flex flex-col justify-between px-4 pt-24 pb-8 overflow-y-auto"
           initial={{ clipPath: 'inset(0 0 100% 0)' }}
           animate={{ clipPath: 'inset(0 0 0% 0)' }}
           exit={{ clipPath: 'inset(0 0 100% 0)' }}
