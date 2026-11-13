@@ -8,8 +8,9 @@ import { formatArticleDate, getArticles } from "@/content/articles";
 import { careerStartYear, getJobs, yearsInTheField, type JobBlock } from "@/content/jobs";
 import { getProjects } from "@/content/projects";
 import { getDictionary } from "@/content/site";
+import { getCommunityItems, getTalks } from "@/content/talks";
 import { projectPath, routePath, routes, type Locale, type RouteKey } from "@/lib/i18n/config";
-import { formatDateRange } from "@/lib/i18n/format-date-range";
+import { formatDateRange, formatMonthYear } from "@/lib/i18n/format-date-range";
 import { absoluteUrl, author, socialProfiles } from "./config";
 
 type LlmsFile = "index" | "full";
@@ -223,6 +224,17 @@ export const buildLlmsFull = (locale: Locale): string => {
           ...project.outcome.map((item) => `- ${item}`),
           ...(project.stats ?? []).map((stat) => `- ${stat.label}: ${stat.value}`),
           ...(project.statsNote ? ["", project.statsNote] : []),
+          ...(project.mentions?.length
+            ? [
+                "",
+                `**${work.mentions}**`,
+                "",
+                ...project.mentions.map(
+                  (mention) =>
+                    `- [${mention.title}](${mention.url}): ${mention.text} (${mention.source}, ${formatMonthYear(mention.publishedAt, locale)})${mention.slidesUrl ? ` [${dictionary.writing.seeSlides}](${absoluteUrl(mention.slidesUrl)}) (${dictionary.writing.slidesNote})` : ""}`
+                ),
+              ]
+            : []),
         ],
         3
       ),
@@ -251,6 +263,33 @@ export const buildLlmsFull = (locale: Locale): string => {
     ]),
   ]);
 
+  const talksSection = section(dictionary.writing.talksTitle.join(" "), [
+    dictionary.writing.talksLead,
+    "",
+    ...getTalks(locale).flatMap((talk) => [
+      section(
+        talk.title,
+        [
+          talk.url,
+          "",
+          `${talk.event} · ${formatMonthYear(talk.date, locale)} · ${talk.location}`,
+          "",
+          talk.description,
+          ...(talk.slidesUrl
+            ? ["", `[${dictionary.writing.seeSlides}](${absoluteUrl(talk.slidesUrl)}) (${dictionary.writing.slidesNote})`]
+            : []),
+        ],
+        3
+      ),
+      "",
+    ]),
+    section(
+      dictionary.writing.communityEyebrow,
+      getCommunityItems(locale).map((item) => `- **${item.title}**: ${item.description}`),
+      3
+    ),
+  ]);
+
   const contactSection = section(nav.labels.contact, [
     text.contactNote,
     "",
@@ -267,6 +306,7 @@ export const buildLlmsFull = (locale: Locale): string => {
     experienceSection,
     caseStudiesSection,
     writingSection,
+    talksSection,
     contactSection,
     optionalSection(locale, "full"),
   ]

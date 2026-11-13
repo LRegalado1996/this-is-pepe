@@ -9,12 +9,32 @@ export interface ProjectStat {
   label: string;
 }
 
+/** A talk or post where the project was presented or told by someone else. */
+export interface ProjectMention {
+  /** Where it appeared, e.g. "Streaver · LinkedIn". */
+  source: string;
+  /** ISO date (YYYY-MM-DD) of the talk or post. */
+  publishedAt: string;
+  url: string;
+  /** Public edition of the slides, when the mention is a talk. */
+  slidesUrl?: string;
+  title: string;
+  text: string;
+}
+
+interface MentionSource extends Omit<ProjectMention, "title" | "text"> {
+  title: Record<Locale, string>;
+  text: Record<Locale, string>;
+}
+
 interface ProjectFacts {
   slug: string;
   stack: string[];
   period: string;
   /** Links to the published write-ups, when the project has them. */
   hasArticles?: boolean;
+  /** Talks and posts about the project, newest first. */
+  mentions?: MentionSource[];
 }
 
 interface ProjectCopy {
@@ -30,7 +50,8 @@ interface ProjectCopy {
   statsNote?: string;
 }
 
-export type Project = ProjectFacts & ProjectCopy;
+export type Project = Omit<ProjectFacts, "mentions"> &
+  ProjectCopy & { mentions?: ProjectMention[] };
 
 const facts: ProjectFacts[] = [
   {
@@ -38,6 +59,35 @@ const facts: ProjectFacts[] = [
     stack: ["Claude Code", "Subagents", "Markdown", "Git", "Jira", "Slack", "GitHub"],
     period: "2026",
     hasArticles: true,
+    mentions: [
+      {
+        source: "Streaver · LinkedIn",
+        publishedAt: "2026-10-09",
+        url: "https://www.linkedin.com/feed/update/urn:li:share:7514438676618326016/",
+        title: {
+          en: "How the Pepitos got their name",
+          es: "De dónde sale el nombre Pepitos",
+        },
+        text: {
+          en: "Streaver's post on the routine that writes Lucas's plan before he opens his laptop — including the time an agent chased him for six days over a duplicate ticket.",
+          es: "El post de Streaver sobre la rutina que escribe el plan de Lucas antes de que abra la laptop — incluida la vez que un agente lo persiguió seis días por un ticket duplicado.",
+        },
+      },
+      {
+        source: "Historias de Producción · Streaver",
+        publishedAt: "2026-09-11",
+        url: "https://www.linkedin.com/feed/update/urn:li:activity:7505324656569257984/",
+        slidesUrl: "/talks/automations-pepitos.pdf",
+        title: {
+          en: "Automations + Pepitos, the talk",
+          es: "Automations + Pepitos, la charla",
+        },
+        text: {
+          en: "“I automated my mornings. Then it got out of hand.” How the system grew to five routines and four agents, and why the answer was delegating better.",
+          es: "“Automaticé mis mañanas. Después se me fue de las manos.” Cómo el sistema creció a cinco rutinas y cuatro agentes, y por qué la respuesta fue delegar mejor.",
+        },
+      },
+    ],
   },
   {
     slug: "shoppable-video-feed",
@@ -336,7 +386,15 @@ const copy: Record<Locale, Record<string, ProjectCopy>> = {
 export const projectSlugs = facts.map((project) => project.slug);
 
 export const getProjects = (locale: Locale): Project[] =>
-  facts.map((project) => ({ ...project, ...copy[locale][project.slug] }));
+  facts.map(({ mentions, ...project }) => ({
+    ...project,
+    ...copy[locale][project.slug],
+    mentions: mentions?.map((mention) => ({
+      ...mention,
+      title: mention.title[locale],
+      text: mention.text[locale],
+    })),
+  }));
 
 export const getProject = (slug: string, locale: Locale): Project | undefined =>
   getProjects(locale).find((project) => project.slug === slug);

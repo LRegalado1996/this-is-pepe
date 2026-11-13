@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { getArticles } from "@/content/articles";
 import type { Project } from "@/content/projects";
 import { getDictionary } from "@/content/site";
+import { getTalks } from "@/content/talks";
 import {
   locales,
   projectPath,
@@ -282,6 +283,27 @@ export const structuredData = {
           url: article.url,
           author: { "@id": personId },
           publisher: { "@type": "Organization", name: article.publisher },
+        },
+      })),
+    };
+  },
+  /** The talks listed on the Writing page, as past events performed by Lucas. */
+  talks(locale: Locale) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      itemListElement: getTalks(locale).map((talk, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Event",
+          name: talk.title,
+          description: talk.description,
+          startDate: talk.date,
+          location: { "@type": "Place", name: talk.location },
+          inLanguage: talk.language,
+          performer: { "@id": personId },
+          url: talk.url,
         },
       })),
     };

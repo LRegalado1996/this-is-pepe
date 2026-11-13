@@ -14,6 +14,7 @@ import { Reveal } from '@/components/ui/reveal';
 import { getProjects, type Project } from '@/content/projects';
 import { getDictionary } from '@/content/site';
 import { projectPath, routePath, type Locale } from '@/lib/i18n/config';
+import { formatMonthYear } from '@/lib/i18n/format-date-range';
 import { structuredData } from '@/lib/seo/config';
 
 interface Props {
@@ -25,7 +26,7 @@ const sectionGrid = 'grid gap-6 md:grid-cols-[minmax(180px,1fr)_3fr] md:gap-10';
 const sectionTitle = 'font-display text-3xl md:text-4xl';
 
 export const CaseStudyView = ({ project, locale }: Props) => {
-  const { work, nav } = getDictionary(locale);
+  const { work, nav, writing } = getDictionary(locale);
   const projects = getProjects(locale);
   const index = projects.findIndex((item) => item.slug === project.slug);
   const next = projects[(index + 1) % projects.length];
@@ -163,6 +164,68 @@ export const CaseStudyView = ({ project, locale }: Props) => {
           </div>
         </div>
       </section>
+
+      {project.mentions && project.mentions.length > 0 && (
+        <section className="w-full max-w-[1280px] px-4 pt-16 md:pt-24">
+          <div className={sectionGrid}>
+            <h2 className={`${sectionTitle} text-ink`}>{work.mentions}</h2>
+            <ul>
+              {project.mentions.map((mention) => (
+                <li
+                  key={mention.url}
+                  className="border-t border-ink/15 first:border-t-0 first:pt-0 py-7 last:pb-0"
+                >
+                  <Reveal>
+                    <p className="text-[0.7rem] uppercase tracking-[0.2em] font-semibold text-moss/70">
+                      <time dateTime={mention.publishedAt}>
+                        {formatMonthYear(mention.publishedAt, locale)}
+                      </time>
+                      {' · '}
+                      {mention.source}
+                    </p>
+                    <a
+                      href={mention.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-start gap-2 mt-3"
+                    >
+                      <span className="font-display text-xl md:text-2xl text-ink transition-colors group-hover:text-moss">
+                        {mention.title}
+                      </span>
+                      <ArrowUpRight
+                        className="w-[0.85em] h-[0.85em] mt-[0.2em] text-volt-dim transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        strokeWidth={2.5}
+                        aria-hidden
+                      />
+                    </a>
+                    <p className="max-w-[60ch] text-ink/80 mt-3">{mention.text}</p>
+                    {mention.slidesUrl && (
+                      <p className="text-sm text-ink/70 mt-4">
+                        <a
+                          href={mention.slidesUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          hrefLang="es"
+                          type="application/pdf"
+                          className="group inline-flex items-center gap-1 mr-3 text-xs uppercase tracking-[0.14em] font-bold text-ink"
+                        >
+                          <span className="border-b-[3px] border-volt pb-1">{writing.seeSlides}</span>
+                          <ArrowUpRight
+                            size={16}
+                            className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                            aria-hidden
+                          />
+                        </a>
+                        {writing.slidesNote}
+                      </p>
+                    )}
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       <section className="w-full max-w-[1280px] px-4 pt-16 md:pt-24">
         <div className="flex flex-wrap items-end justify-between gap-8">

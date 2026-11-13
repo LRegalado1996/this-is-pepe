@@ -11,6 +11,17 @@ const labels = {
 
 const capitalize = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
 
+/** Formats an ISO date as "Sep 2026", for talks and mentions. */
+export function formatMonthYear(isoDate: string, locale: Locale): string {
+  const formatter = new Intl.DateTimeFormat(labels[locale].tag, {
+    year: "numeric",
+    month: "short",
+    timeZone: "UTC",
+  });
+
+  return capitalize(formatter.format(new Date(isoDate)).replace(".", ""));
+}
+
 export function formatDateRange(startDate: Date, endDate: Date | null, locale: Locale): string {
   const { present, year, month, tag } = labels[locale];
   const end = endDate ?? new Date();

@@ -56,6 +56,13 @@ export interface Dictionary {
     readOn: (publisher: string) => string;
     eyebrow: string;
     lead: string;
+    talksTitle: [string, string];
+    talksLead: string;
+    communityEyebrow: string;
+    seePost: string;
+    seeSlides: string;
+    /** Shown next to the slides link: the talk and its slides are in Spanish. */
+    slidesNote: string;
   };
   callout: { words: string[]; highlight: string; text: (years: number) => string };
   closing: { eyebrow: string; cta: string };
@@ -88,6 +95,7 @@ export interface Dictionary {
     approach: string;
     outcome: string;
     readArticles: string;
+    mentions: string;
     nextProject: string;
     backToWork: string;
   };
@@ -182,10 +190,15 @@ const en: Dictionary = {
       keywords: ["work experience", "Lucas Regalado resume"],
     },
     writing: {
-      title: "Writing · AI Agents and Software Engineering",
+      title: "Writing & Talks · AI Agents and Software Engineering",
       description:
-        "Articles by Lucas Regalado on working with AI agents: automating daily tasks with scheduled routines and reducing Claude Code token usage with subagents.",
-      keywords: ["AI agents articles", "Claude Code token usage", "automate daily tasks AI agent"],
+        "Articles and talks by Lucas Regalado on working with AI agents: automating daily tasks with scheduled routines, reducing Claude Code token usage with subagents, and the talk Automations + Pepitos.",
+      keywords: [
+        "AI agents articles",
+        "Claude Code token usage",
+        "automate daily tasks AI agent",
+        "AI agents talks Uruguay",
+      ],
     },
     contact: {
       title: "Contact",
@@ -236,6 +249,13 @@ const en: Dictionary = {
     readOn: (publisher) => `Read on ${publisher}`,
     eyebrow: "Articles — AI agents and engineering",
     lead: "Notes from putting AI agents to work on the routine around the code: what I built, what it cost and what I would do again.",
+    talksTitle: ["Talks &", "Community"],
+    talksLead:
+      "Where I show up in person: talks and the events of the Uruguayan tech community I keep coming back to.",
+    communityEyebrow: "Around the community",
+    seePost: "See the post",
+    seeSlides: "See the slides",
+    slidesNote: "PDF · The talk was given in Spanish and the slides are in Spanish.",
   },
   callout: {
     words: ["I", "build", "web", "products", "that", "scale."],
@@ -283,6 +303,7 @@ const en: Dictionary = {
     approach: "The approach",
     outcome: "The outcome",
     readArticles: "Read the full write-ups",
+    mentions: "Talks & mentions",
     nextProject: "Next project",
     backToWork: "All work",
   },
@@ -382,10 +403,15 @@ const es: Dictionary = {
       keywords: ["experiencia laboral", "currículum Lucas Regalado"],
     },
     writing: {
-      title: "Escritos · Agentes de IA e ingeniería de software",
+      title: "Escritos y charlas · Agentes de IA e ingeniería de software",
       description:
-        "Artículos de Lucas Regalado sobre cómo trabajar con agentes de IA: automatizar tareas diarias con rutinas programadas y reducir el consumo de tokens de Claude Code con subagentes.",
-      keywords: ["artículos agentes de IA", "tokens Claude Code", "automatizar tareas con IA"],
+        "Artículos y charlas de Lucas Regalado sobre cómo trabajar con agentes de IA: automatizar tareas diarias con rutinas programadas, reducir el consumo de tokens de Claude Code con subagentes, y la charla Automations + Pepitos.",
+      keywords: [
+        "artículos agentes de IA",
+        "tokens Claude Code",
+        "automatizar tareas con IA",
+        "charlas agentes de IA Uruguay",
+      ],
     },
     contact: {
       title: "Contacto",
@@ -440,6 +466,13 @@ const es: Dictionary = {
     readOn: (publisher) => `Leer en ${publisher}`,
     eyebrow: "Artículos — agentes de IA e ingeniería",
     lead: "Notas sobre poner agentes de IA a trabajar en la rutina que rodea al código: qué construí, cuánto costó y qué volvería a hacer. Los artículos están en inglés.",
+    talksTitle: ["Charlas y", "Comunidad"],
+    talksLead:
+      "Donde aparezco en persona: charlas y los eventos de la comunidad tecnológica uruguaya a los que siempre vuelvo.",
+    communityEyebrow: "Por la comunidad",
+    seePost: "Ver el post",
+    seeSlides: "Ver las slides",
+    slidesNote: "PDF · La charla se dio en español y las slides están en español.",
   },
   callout: {
     words: ["Construyo", "productos", "web", "que", "escalan."],
@@ -488,6 +521,7 @@ const es: Dictionary = {
     approach: "El enfoque",
     outcome: "El resultado",
     readArticles: "Leer los artículos completos",
+    mentions: "Charlas y menciones",
     nextProject: "Siguiente proyecto",
     backToWork: "Todos los proyectos",
   },
