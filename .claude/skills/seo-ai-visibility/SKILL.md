@@ -23,6 +23,7 @@ Everything derives from `src/content`. Change the content and the rest follows:
 | llms.txt | `src/lib/seo/llms.ts`, served at `/llms.txt`, `/llms-full.txt`, `/es/llms.txt`, `/es/llms-full.txt` | Generated; never hand-write these files |
 | Share cards | `src/app/share/[locale]/[image]/route.tsx` | One per page and locale |
 | Site URL | `NEXT_PUBLIC_SITE_URL` | Drives every absolute URL |
+| Favicon | `src/app/favicon.ico`, `icon.png`, `apple-icon.png` routes, declared in `buildRootMetadata` | Fixed URLs on purpose: Next's `icon.tsx` convention adds a hash that changes per deploy and leaves `/favicon.ico` as a 404, which delays the icon in Google results |
 
 ## Checklist for every change
 

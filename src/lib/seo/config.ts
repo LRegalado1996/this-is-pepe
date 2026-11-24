@@ -171,6 +171,14 @@ export const buildRootMetadata = (locale: Locale): Metadata => {
     creator: author.name,
     publisher: author.name,
     robots: { index: true, follow: true },
+    // Fixed addresses: search engines are slow to pick up an icon whose URL changes.
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "48x48" },
+        { url: "/icon.png", type: "image/png", sizes: "96x96" },
+      ],
+      apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+    },
     // Set these in Vercel with the tokens from Search Console and Bing Webmaster Tools.
     verification: {
       google: process.env.GOOGLE_SITE_VERIFICATION,

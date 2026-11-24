@@ -1,5 +1,6 @@
 /**
- * "LR" monogram used for the favicon and the Apple touch icon: tight display
+ * "LR" monogram used for the favicon and the Apple touch icon (served by the
+ * `favicon.ico`, `icon.png` and `apple-icon.png` routes): tight display
  * letters in volt on a moss tile.
  */
 import { readFile } from "node:fs/promises";
