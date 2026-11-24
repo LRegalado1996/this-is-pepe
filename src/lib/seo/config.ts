@@ -24,7 +24,7 @@ export const author = {
   name: "Lucas Regalado",
   givenName: "Lucas",
   familyName: "Regalado",
-  jobTitle: "Senior Full Stack Developer",
+  jobTitle: "Full Stack Developer",
   email: "lucasregalado@hotmail.com",
   location: {
     city: "Montevideo",

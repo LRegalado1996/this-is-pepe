@@ -50,7 +50,7 @@ Everything derives from `src/content`. Change the content and the rest follows:
 - State facts plainly and in the third person where it is natural: who, what
   role, where, since when, with which stack. The `tagline` is the model.
 - Prefer concrete numbers and dates over adjectives; the case studies do this.
-- Keep names consistent everywhere: "Lucas Regalado", "Senior Full Stack
+- Keep names consistent everywhere: "Lucas Regalado", "Full Stack
   Developer", "Montevideo, Uruguay", "Streaver".
 - Spanish and English pages say the same thing; hreflang links them.
 

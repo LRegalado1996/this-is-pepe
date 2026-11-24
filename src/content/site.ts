@@ -130,10 +130,10 @@ export interface Dictionary {
 }
 
 const en: Dictionary = {
-  role: "Senior Full Stack Developer",
+  role: "Full Stack Developer",
   location: "Montevideo, Uruguay",
   tagline:
-    "Lucas Regalado is a senior full stack developer from Montevideo, Uruguay. He builds web products with React, Next.js and TypeScript, and writes about working with AI agents.",
+    "Lucas Regalado is a full stack developer from Montevideo, Uruguay. He builds web products with React, Next.js and TypeScript, and writes about working with AI agents.",
   keywords: [
     "Lucas Regalado",
     "Lucas 'Pepe' Regalado",
@@ -168,13 +168,13 @@ const en: Dictionary = {
     home: {
       title: "Lucas Regalado · Full Stack Developer",
       description:
-        "Lucas Regalado is a senior full stack developer from Montevideo, Uruguay. He builds web products with React, Next.js and TypeScript, and writes about working with AI agents.",
+        "Lucas Regalado is a full stack developer from Montevideo, Uruguay. He builds web products with React, Next.js and TypeScript, and writes about working with AI agents.",
       keywords: ["portfolio", "software engineer Montevideo"],
     },
     about: {
       title: "About Me · Full Stack Developer",
       description:
-        "Who Lucas Regalado is: a senior full stack developer from Montevideo, Uruguay. How he works, the stack he uses and his life outside the code.",
+        "Who Lucas Regalado is: a full stack developer from Montevideo, Uruguay. How he works, the stack he uses and his life outside the code.",
       keywords: ["about lucas regalado", "software developer biography"],
     },
     work: {
@@ -186,7 +186,7 @@ const en: Dictionary = {
     experience: {
       title: "Work Experience",
       description:
-        "The professional journey of Lucas Regalado, senior full stack developer: from tech support in 2016 to leading teams and building AI-driven products with React, Next.js and Node.js.",
+        "The professional journey of Lucas Regalado, full stack developer: from tech support in 2016 to leading teams and building AI-driven products with React, Next.js and Node.js.",
       keywords: ["work experience", "Lucas Regalado resume"],
     },
     writing: {
@@ -203,7 +203,7 @@ const en: Dictionary = {
     contact: {
       title: "Contact",
       description:
-        "Get in touch with Lucas Regalado, senior full stack developer in Montevideo, Uruguay. Email, LinkedIn, WhatsApp or a 30-minute call, in English or Spanish.",
+        "Get in touch with Lucas Regalado, full stack developer in Montevideo, Uruguay. Email, LinkedIn, WhatsApp or a 30-minute call, in English or Spanish.",
       keywords: ["contact lucas regalado"],
     },
     caseStudySuffix: "Case Study",
@@ -343,10 +343,10 @@ const en: Dictionary = {
 };
 
 const es: Dictionary = {
-  role: "Desarrollador Full Stack Senior",
+  role: "Desarrollador Full Stack",
   location: "Montevideo, Uruguay",
   tagline:
-    "Lucas Regalado es un desarrollador full stack senior de Montevideo, Uruguay. Construye productos web con React, Next.js y TypeScript, y escribe sobre cómo trabajar con agentes de IA.",
+    "Lucas Regalado es un desarrollador full stack de Montevideo, Uruguay. Construye productos web con React, Next.js y TypeScript, y escribe sobre cómo trabajar con agentes de IA.",
   keywords: [
     "Lucas Regalado",
     "Lucas 'Pepe' Regalado",
@@ -381,13 +381,13 @@ const es: Dictionary = {
     home: {
       title: "Lucas Regalado · Desarrollador Full Stack",
       description:
-        "Lucas Regalado es un desarrollador full stack senior de Montevideo, Uruguay. Construye productos web con React, Next.js y TypeScript, y escribe sobre cómo trabajar con agentes de IA.",
+        "Lucas Regalado es un desarrollador full stack de Montevideo, Uruguay. Construye productos web con React, Next.js y TypeScript, y escribe sobre cómo trabajar con agentes de IA.",
       keywords: ["portfolio", "ingeniero de software Montevideo"],
     },
     about: {
       title: "Sobre mí · Desarrollador Full Stack",
       description:
-        "Quién es Lucas Regalado: desarrollador full stack senior de Montevideo, Uruguay. Cómo trabaja, el stack que usa y su vida fuera del código.",
+        "Quién es Lucas Regalado: desarrollador full stack de Montevideo, Uruguay. Cómo trabaja, el stack que usa y su vida fuera del código.",
       keywords: ["sobre lucas regalado", "biografía desarrollador de software"],
     },
     work: {
@@ -399,7 +399,7 @@ const es: Dictionary = {
     experience: {
       title: "Experiencia laboral",
       description:
-        "La trayectoria profesional de Lucas Regalado, desarrollador full stack senior: del soporte técnico en 2016 a liderar equipos y construir productos con IA usando React, Next.js y Node.js.",
+        "La trayectoria profesional de Lucas Regalado, desarrollador full stack: del soporte técnico en 2016 a liderar equipos y construir productos con IA usando React, Next.js y Node.js.",
       keywords: ["experiencia laboral", "currículum Lucas Regalado"],
     },
     writing: {
@@ -416,7 +416,7 @@ const es: Dictionary = {
     contact: {
       title: "Contacto",
       description:
-        "Contactá a Lucas Regalado, desarrollador full stack senior en Montevideo, Uruguay. Email, LinkedIn, WhatsApp o una llamada de 30 minutos, en español o inglés.",
+        "Contactá a Lucas Regalado, desarrollador full stack en Montevideo, Uruguay. Email, LinkedIn, WhatsApp o una llamada de 30 minutos, en español o inglés.",
       keywords: ["contacto lucas regalado"],
     },
     caseStudySuffix: "Caso de estudio",
