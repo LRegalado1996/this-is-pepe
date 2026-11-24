@@ -1,7 +1,10 @@
 /**
  * Case study page: the challenge, the approach step by step, the outcome
- * with its numbers, and a link on to the next project.
+ * with its numbers, and a link on to the next project. A live product of
+ * Lucas's own shows what it does, its screens on a phone and in the admin,
+ * what is missing and what comes next instead.
  */
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { JsonLd } from '@/components/seo/json-ld';
@@ -11,7 +14,12 @@ import { CountUp } from '@/components/ui/count-up';
 import { Eyebrow } from '@/components/ui/eyebrow';
 import { PageHero } from '@/components/ui/page-hero';
 import { Reveal } from '@/components/ui/reveal';
-import { getProjects, type Project } from '@/content/projects';
+import {
+  getProjects,
+  type Project,
+  type ProjectScreen,
+  type ProjectStep,
+} from '@/content/projects';
 import { getDictionary } from '@/content/site';
 import { projectPath, routePath, type Locale } from '@/lib/i18n/config';
 import { formatMonthYear } from '@/lib/i18n/format-date-range';
@@ -22,14 +30,151 @@ interface Props {
   locale: Locale;
 }
 
-const sectionGrid = 'grid gap-6 md:grid-cols-[minmax(180px,1fr)_3fr] md:gap-10';
+const sectionGrid = 'grid grid-cols-1 gap-6 md:grid-cols-[minmax(180px,1fr)_3fr] md:gap-10';
 const sectionTitle = 'font-display text-3xl md:text-4xl';
+
+const arrowLink =
+  'group inline-flex items-center gap-1 text-xs uppercase tracking-[0.14em] font-bold border-b-[3px] border-volt pb-1 transition-colors';
+
+/** Numbered steps on a paper-2 block: the approach, or what a product does. */
+const StepsSection = ({ title, steps }: { title: string; steps: ProjectStep[] }) => (
+  <section className="w-full bg-paper-2">
+    <div className="max-w-[1280px] m-auto px-4 py-16 md:py-24">
+      <div className={sectionGrid}>
+        <h2 className={`${sectionTitle} text-ink`}>{title}</h2>
+        <ol>
+          {steps.map((step, i) => (
+            <li
+              key={step.title}
+              className="border-t border-ink/15 first:border-t-0 first:pt-0 py-7 last:pb-0"
+            >
+              <Reveal className="grid gap-3 sm:grid-cols-[70px_1fr]">
+                <span className="font-display text-3xl md:text-4xl text-volt-dim" aria-hidden>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div>
+                  <h3 className="font-display text-xl md:text-2xl text-ink">{step.title}</h3>
+                  <p className="max-w-[60ch] text-ink/80 mt-3">{step.text}</p>
+                </div>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+);
+
+const frame = 'overflow-hidden rounded-xl border border-ink/15 bg-paper-2';
+
+interface ScreensProps {
+  title: string;
+  note: string;
+  screens: ProjectScreen[];
+}
+
+const ScreensHeading = ({ title, note }: Omit<ScreensProps, 'screens'>) => (
+  <div>
+    <h2 className={`${sectionTitle} text-ink`}>{title}</h2>
+    <p className="text-sm text-ink/70 mt-4 max-w-[28ch]">{note}</p>
+  </div>
+);
+
+/** Number and title on one baseline, in a fixed column so every caption lines up. */
+const ScreenCaption = ({ screen, index }: { screen: ProjectScreen; index: number }) => (
+  <figcaption className="grid grid-cols-[2.5rem_1fr] items-baseline gap-y-2 mt-5">
+    <span className="font-display text-xl md:text-2xl text-volt-dim" aria-hidden>
+      {String(index + 1).padStart(2, '0')}
+    </span>
+    <h3 className="font-display text-xl md:text-2xl text-ink">{screen.title}</h3>
+    <p className="col-start-2 max-w-[52ch] text-ink/80">{screen.text}</p>
+  </figcaption>
+);
+
+/** The store on a phone: three screens side by side, a swipeable row on small screens. */
+const StoreScreens = ({ title, note, screens }: ScreensProps) => (
+  <section className="w-full max-w-[1280px] px-4 pb-16 md:pb-24">
+    <div className={sectionGrid}>
+      <ScreensHeading title={title} note={note} />
+      <ul className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 -mx-4 px-4 md:mx-0 md:px-0 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible">
+        {screens.map((screen, i) => (
+          <li key={screen.src} className="w-[78%] shrink-0 snap-start sm:w-[46%] md:w-auto">
+            <Reveal delay={i * 0.08}>
+              <figure>
+                <div className={frame}>
+                  <Image
+                    src={screen.src}
+                    alt={screen.alt}
+                    width={screen.width}
+                    height={screen.height}
+                    sizes="(min-width: 768px) 300px, 72vw"
+                    className="w-full h-auto"
+                  />
+                </div>
+                <ScreenCaption screen={screen} index={i} />
+              </figure>
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+);
+
+/** The admin on a computer: one wide screen per row. */
+const AdminScreens = ({ title, note, hint, screens }: ScreensProps & { hint: string }) => (
+  <section className="w-full max-w-[1280px] px-4 py-16 md:py-24">
+    <div className={sectionGrid}>
+      <ScreensHeading title={title} note={note} />
+      <ul className="flex flex-col gap-12 md:gap-20">
+        {screens.map((screen, i) => (
+          <li key={screen.src}>
+            <Reveal>
+              <figure>
+                {/* A computer screen is unreadable at phone width: there it keeps a legible size and pans sideways. */}
+                <div className={`${frame} no-scrollbar overflow-x-auto`} data-lenis-prevent>
+                  <Image
+                    src={screen.src}
+                    alt={screen.alt}
+                    width={screen.width}
+                    height={screen.height}
+                    sizes="(min-width: 1280px) 930px, (min-width: 768px) 72vw, 680px"
+                    className="w-[680px] max-w-none h-auto md:w-full"
+                  />
+                </div>
+                {i === 0 && <p className="text-xs text-ink/70 mt-3 md:hidden">{hint}</p>}
+                <ScreenCaption screen={screen} index={i} />
+              </figure>
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+);
+
+/** Volt-bulleted list for the moss block. */
+const BulletList = ({ items }: { items: string[] }) => (
+  <ul className="flex flex-col gap-4 max-w-[64ch] md:text-lg">
+    {items.map((item) => (
+      <li key={item} className="flex gap-3">
+        <span className="mt-[0.6em] h-2 w-2 shrink-0 bg-volt" aria-hidden />
+        <span className="text-paper/90">{item}</span>
+      </li>
+    ))}
+  </ul>
+);
 
 export const CaseStudyView = ({ project, locale }: Props) => {
   const { work, nav, writing } = getDictionary(locale);
   const projects = getProjects(locale);
   const index = projects.findIndex((item) => item.slug === project.slug);
   const next = projects[(index + 1) % projects.length];
+
+  const roadmap = [
+    { title: work.missing, items: project.missing },
+    { title: work.next, items: project.next },
+  ].filter((group): group is { title: string; items: string[] } => Boolean(group.items?.length));
 
   const facts = [
     { label: work.role, value: project.role },
@@ -50,6 +195,21 @@ export const CaseStudyView = ({ project, locale }: Props) => {
 
       <PageHero eyebrow={`${work.caseStudy} — ${project.context}`} lines={[project.title]}>
         <p>{project.summary}</p>
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener"
+            className={`${arrowLink} mt-6 text-ink hover:text-moss`}
+          >
+            {work.visitSite}
+            <ArrowUpRight
+              size={16}
+              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              aria-hidden
+            />
+          </a>
+        )}
       </PageHero>
 
       <section className="w-full max-w-[1280px] px-4">
@@ -90,80 +250,76 @@ export const CaseStudyView = ({ project, locale }: Props) => {
         </Reveal>
       </section>
 
-      <section className="w-full bg-paper-2">
-        <div className="max-w-[1280px] m-auto px-4 py-16 md:py-24">
-          <div className={sectionGrid}>
-            <h2 className={`${sectionTitle} text-ink`}>{work.approach}</h2>
-            <ol>
-              {project.approach.map((step, i) => (
-                <li key={step.title} className="border-t border-ink/15 first:border-t-0 first:pt-0 py-7 last:pb-0">
-                  <Reveal className="grid gap-3 sm:grid-cols-[70px_1fr]">
-                    <span className="font-display text-3xl md:text-4xl text-volt-dim" aria-hidden>
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <div>
-                      <h3 className="font-display text-xl md:text-2xl text-ink">{step.title}</h3>
-                      <p className="max-w-[60ch] text-ink/80 mt-3">{step.text}</p>
-                    </div>
-                  </Reveal>
-                </li>
-              ))}
-            </ol>
+      {project.screens && <StoreScreens {...work.storeScreens} screens={project.screens.store} />}
+
+      {project.approach && <StepsSection title={work.approach} steps={project.approach} />}
+      {project.shipped && <StepsSection title={work.shipped} steps={project.shipped} />}
+
+      {project.screens && <AdminScreens {...work.adminScreens} screens={project.screens.admin} />}
+
+      {roadmap.length > 0 && (
+        <section className="w-full bg-moss text-paper">
+          <div className="max-w-[1280px] m-auto px-4 py-16 md:py-24 flex flex-col gap-14 md:gap-20">
+            {roadmap.map((group) => (
+              <Reveal key={group.title} className={sectionGrid}>
+                <h2 className={sectionTitle}>{group.title}</h2>
+                <BulletList items={group.items} />
+              </Reveal>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      <section className="w-full bg-moss text-paper">
-        <div className="max-w-[1280px] m-auto px-4 py-16 md:py-24">
-          <div className={sectionGrid}>
-            <h2 className={sectionTitle}>{work.outcome}</h2>
-            <div>
-              <ul className="flex flex-col gap-4 max-w-[64ch] md:text-lg">
-                {project.outcome.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span className="mt-[0.6em] h-2 w-2 shrink-0 bg-volt" aria-hidden />
-                    <span className="text-paper/90">{item}</span>
-                  </li>
-                ))}
-              </ul>
+      {project.outcome && (
+        <section className="w-full bg-moss text-paper">
+          <div className="max-w-[1280px] m-auto px-4 py-16 md:py-24">
+            <div className={sectionGrid}>
+              <h2 className={sectionTitle}>{work.outcome}</h2>
+              <div>
+                <BulletList items={project.outcome} />
 
-              {project.stats && (
-                <>
-                  <dl className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 mt-14 pt-10 border-t border-paper/20">
-                    {project.stats.map((stat, i) => (
-                      <Reveal key={stat.label} delay={i * 0.07} className="flex flex-col-reverse gap-2">
-                        <dt className="text-[0.7rem] md:text-xs uppercase tracking-[0.16em] font-semibold text-paper/70">
-                          {stat.label}
-                        </dt>
-                        <dd className="font-display text-6xl md:text-7xl text-volt">
-                          <CountUp value={stat.value} />
-                        </dd>
-                      </Reveal>
-                    ))}
-                  </dl>
-                  {project.statsNote && (
-                    <p className="text-sm text-paper/60 mt-6">{project.statsNote}</p>
-                  )}
-                </>
-              )}
+                {project.stats && (
+                  <>
+                    <dl className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 mt-14 pt-10 border-t border-paper/20">
+                      {project.stats.map((stat, i) => (
+                        <Reveal
+                          key={stat.label}
+                          delay={i * 0.07}
+                          className="flex flex-col-reverse gap-2"
+                        >
+                          <dt className="text-[0.7rem] md:text-xs uppercase tracking-[0.16em] font-semibold text-paper/70">
+                            {stat.label}
+                          </dt>
+                          <dd className="font-display text-6xl md:text-7xl text-volt">
+                            <CountUp value={stat.value} />
+                          </dd>
+                        </Reveal>
+                      ))}
+                    </dl>
+                    {project.statsNote && (
+                      <p className="text-sm text-paper/60 mt-6">{project.statsNote}</p>
+                    )}
+                  </>
+                )}
 
-              {project.hasArticles && (
-                <Link
-                  href={routePath('writing', locale)}
-                  className="group inline-flex items-center gap-1 mt-10 text-xs uppercase tracking-[0.14em] font-bold border-b-[3px] border-volt pb-1 transition-colors hover:text-volt"
-                >
-                  {work.readArticles}
-                  <ArrowUpRight
-                    size={16}
-                    className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    aria-hidden
-                  />
-                </Link>
-              )}
+                {project.hasArticles && (
+                  <Link
+                    href={routePath('writing', locale)}
+                    className="group inline-flex items-center gap-1 mt-10 text-xs uppercase tracking-[0.14em] font-bold border-b-[3px] border-volt pb-1 transition-colors hover:text-volt"
+                  >
+                    {work.readArticles}
+                    <ArrowUpRight
+                      size={16}
+                      className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      aria-hidden
+                    />
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {project.mentions && project.mentions.length > 0 && (
         <section className="w-full max-w-[1280px] px-4 pt-16 md:pt-24">
@@ -209,7 +365,9 @@ export const CaseStudyView = ({ project, locale }: Props) => {
                           type="application/pdf"
                           className="group inline-flex items-center gap-1 mr-3 text-xs uppercase tracking-[0.14em] font-bold text-ink"
                         >
-                          <span className="border-b-[3px] border-volt pb-1">{writing.seeSlides}</span>
+                          <span className="border-b-[3px] border-volt pb-1">
+                            {writing.seeSlides}
+                          </span>
                           <ArrowUpRight
                             size={16}
                             className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"

@@ -48,6 +48,14 @@ Rules:
 - `CountUp`: animated numbers
 - `ClosingCta`: the "Let's talk" closing block on every page except Contact
 
+## Product screenshots
+
+Photos of people are duotone; screenshots of a product are not: they keep their real colors inside a hairline frame (`rounded-xl border border-ink/15`), with a numbered caption underneath (display title plus one sentence). Phone screens sit three across and become a swipeable row on small screens; computer screens go one per row. Files live in `public/images/projects/<slug>/`.
+
+## Dialogs
+
+One pattern, `StoreInvite` in `src/components/home`: an `ink/75` backdrop and a centered moss panel (`rounded-xl`, `max-w-[560px]`) with an eyebrow, a display headline revealed line by line, one volt pill button and a round close button. It sits at `z-30`: above the header (`z-20`), below the page curtain (`z-40`). It closes with Escape, the close button or a click outside, keeps focus inside while open and locks the page scroll. No stacked dialogs, and never more than one per visit.
+
 ## Content and tone
 
 - All copy lives in `src/content`, in English and Spanish. Never hardcode interface text in components.

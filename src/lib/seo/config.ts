@@ -45,6 +45,9 @@ export const socialProfiles = {
   email: `mailto:${author.email}`,
 } as const;
 
+/** LR Market, Lucas's own online store. */
+export const storeUrl = "https://market.lucasregalado.com";
+
 const twitterHandle = "@lucasregalado5";
 
 const ogLocale: Record<Locale, string> = { en: "en_US", es: "es_UY" };
@@ -326,6 +329,12 @@ export const structuredData = {
       inLanguage: locale,
       keywords: project.stack.join(", "),
       creator: { "@id": personId },
+      ...(project.liveUrl && { sameAs: project.liveUrl }),
+      ...(project.screens && {
+        image: [...project.screens.store, ...project.screens.admin].map((screen) =>
+          absoluteUrl(screen.src)
+        ),
+      }),
     };
   },
 };

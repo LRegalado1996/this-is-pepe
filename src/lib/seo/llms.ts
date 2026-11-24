@@ -85,6 +85,16 @@ const link = (label: string, path: string, note?: string) =>
 const section = (title: string, lines: string[], level = 2) =>
   [`${"#".repeat(level)} ${title}`, "", ...lines].join("\n");
 
+/** A titled list of a case study, or nothing when the project has none. */
+const bullets = (title: string, items: string[] | undefined, trailingGap = true): string[] =>
+  items?.length ? [`**${title}**`, "", ...items.map((item) => `- ${item}`), ...(trailingGap ? [""] : [])] : [];
+
+const steps = (title: string, items: { title: string; text: string }[] | undefined): string[] =>
+  bullets(
+    title,
+    items?.map((step) => `**${step.title}**: ${step.text}`)
+  );
+
 /** H1, summary and the key facts: the opening both files share. */
 const header = (locale: Locale): string => {
   const dictionary = getDictionary(locale);
@@ -211,17 +221,18 @@ export const buildLlmsFull = (locale: Locale): string => {
           `- ${work.role}: ${project.role}`,
           `- ${work.period}: ${project.period}`,
           `- ${work.stack}: ${project.stack.join(", ")}`,
+          ...(project.liveUrl ? [`- ${work.visitSite}: ${project.liveUrl}`] : []),
           "",
           `**${work.challenge}**`,
           "",
           ...project.challenge.flatMap((paragraph) => [paragraph, ""]),
-          `**${work.approach}**`,
-          "",
-          ...project.approach.map((step) => `- **${step.title}**: ${step.text}`),
-          "",
-          `**${work.outcome}**`,
-          "",
-          ...project.outcome.map((item) => `- ${item}`),
+          ...steps(work.approach, project.approach),
+          ...steps(work.shipped, project.shipped),
+          ...steps(work.storeScreens.title, project.screens?.store),
+          ...steps(work.adminScreens.title, project.screens?.admin),
+          ...bullets(work.missing, project.missing),
+          ...bullets(work.next, project.next),
+          ...bullets(work.outcome, project.outcome, false),
           ...(project.stats ?? []).map((stat) => `- ${stat.label}: ${stat.value}`),
           ...(project.statsNote ? ["", project.statsNote] : []),
           ...(project.mentions?.length

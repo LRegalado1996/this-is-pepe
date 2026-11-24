@@ -84,6 +84,15 @@
   pointer-events: none;
 }
 
+/* Swipeable rows keep their scroll but drop the bar. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Keyboard focus ring in the brand accent, visible on paper and moss. */
 :focus-visible {
   outline: 3px solid var(--color-volt-dim);

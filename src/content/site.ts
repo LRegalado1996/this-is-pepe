@@ -65,6 +65,16 @@ export interface Dictionary {
     slidesNote: string;
   };
   callout: { words: string[]; highlight: string; text: (years: number) => string };
+  /** Invitation to LR Market, shown on the home to visitors in Uruguay. */
+  storeInvite: {
+    eyebrow: string;
+    title: string[];
+    highlight: string;
+    text: string;
+    cta: string;
+    newTab: string;
+    close: string;
+  };
   closing: { eyebrow: string; cta: string };
   footer: { bio: string; pages: string; elsewhere: string; email: string; madeIn: string };
   about: {
@@ -94,6 +104,12 @@ export interface Dictionary {
     challenge: string;
     approach: string;
     outcome: string;
+    shipped: string;
+    missing: string;
+    next: string;
+    visitSite: string;
+    storeScreens: { title: string; note: string };
+    adminScreens: { title: string; note: string; hint: string };
     readArticles: string;
     mentions: string;
     nextProject: string;
@@ -180,7 +196,7 @@ const en: Dictionary = {
     work: {
       title: "Selected Work · Case Studies",
       description:
-        "Case studies by Lucas Regalado: a crew of AI agents for developer workflow, a shoppable video feed, an e-commerce replatform to Next.js and a clinical-trials reporting framework.",
+        "Case studies by Lucas Regalado: LR Market, his own online store, a crew of AI agents for developer workflow, a shoppable video feed, an e-commerce replatform to Next.js and a clinical-trials reporting framework.",
       keywords: ["case studies", "Next.js migration", "AI agents workflow"],
     },
     experience: {
@@ -262,6 +278,15 @@ const en: Dictionary = {
     highlight: "scale.",
     text: (years) => `${years} years shipping for teams in the US and Europe — from Montevideo, Uruguay.`,
   },
+  storeInvite: {
+    eyebrow: "Visiting from Uruguay",
+    title: ["I opened", "a store."],
+    highlight: "a store.",
+    text: "LR Market is a real, working store that takes orders online.",
+    cta: "Visit the store",
+    newTab: "opens in a new tab",
+    close: "Close",
+  },
   closing: { eyebrow: "A project, a talk, an idea — or just to say hi", cta: "Let's talk" },
   footer: {
     bio: "Full Stack Developer from Montevideo, Uruguay. Currently building at",
@@ -302,6 +327,19 @@ const en: Dictionary = {
     challenge: "The challenge",
     approach: "The approach",
     outcome: "The outcome",
+    shipped: "What it does today",
+    missing: "What is missing",
+    next: "What I would like to add",
+    visitSite: "Visit the store",
+    storeScreens: {
+      title: "On a phone",
+      note: "Taken from the public store in November 2026.",
+    },
+    adminScreens: {
+      title: "Behind the counter",
+      note: "The admin panel, taken from the test environment with sample articles and orders.",
+      hint: "Swipe sideways over a screen to see all of it.",
+    },
     readArticles: "Read the full write-ups",
     mentions: "Talks & mentions",
     nextProject: "Next project",
@@ -393,7 +431,7 @@ const es: Dictionary = {
     work: {
       title: "Proyectos destacados · Casos de estudio",
       description:
-        "Casos de estudio de Lucas Regalado: un equipo de agentes de IA para el flujo de trabajo, un feed de videos comprables, la migración de un e-commerce a Next.js y un framework de reportes para ensayos clínicos.",
+        "Casos de estudio de Lucas Regalado: LR Market, su propia tienda online, un equipo de agentes de IA para el flujo de trabajo, un feed de videos comprables, la migración de un e-commerce a Next.js y un framework de reportes para ensayos clínicos.",
       keywords: ["casos de estudio", "migración a Next.js", "agentes de IA"],
     },
     experience: {
@@ -480,6 +518,15 @@ const es: Dictionary = {
     text: (years) =>
       `${years} años entregando para equipos de Estados Unidos y Europa, desde Montevideo, Uruguay.`,
   },
+  storeInvite: {
+    eyebrow: "Desde Uruguay",
+    title: ["Abrí mi", "tienda."],
+    highlight: "tienda.",
+    text: "LR Market es una tienda real y funcionando, con pedidos online.",
+    cta: "Visitar la tienda",
+    newTab: "se abre en una pestaña nueva",
+    close: "Cerrar",
+  },
   closing: { eyebrow: "Un proyecto, una charla, una idea — o simplemente saludar", cta: "Hablemos" },
   footer: {
     bio: "Desarrollador Full Stack de Montevideo, Uruguay. Hoy construyendo en",
@@ -520,6 +567,19 @@ const es: Dictionary = {
     challenge: "El desafío",
     approach: "El enfoque",
     outcome: "El resultado",
+    shipped: "Lo que ya hace",
+    missing: "Lo que falta",
+    next: "Lo que me gustaría agregar",
+    visitSite: "Visitar la tienda",
+    storeScreens: {
+      title: "En el celular",
+      note: "Tomadas de la tienda pública en noviembre de 2026.",
+    },
+    adminScreens: {
+      title: "Detrás del mostrador",
+      note: "El panel de administración, tomado del entorno de prueba con artículos y pedidos de ejemplo.",
+      hint: "Deslizá hacia el costado sobre una pantalla para verla entera.",
+    },
     readArticles: "Leer los artículos completos",
     mentions: "Charlas y menciones",
     nextProject: "Siguiente proyecto",
