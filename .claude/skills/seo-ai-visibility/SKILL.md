@@ -90,6 +90,10 @@ in Google's Rich Results Test and inspect it in Search Console.
   `Optional` marks links that can be skipped.
 - ChatGPT search and Copilot lean on Bing's index, so Bing Webmaster Tools
   matters as much as Search Console.
+- IndexNow tells Bing (and through it ChatGPT search and Copilot) about new or
+  changed URLs right away; Google ignores it. The key file is
+  `public/cbe781af261a2ce1cb9554809dcdb1c3.txt`. After publishing new pages,
+  POST their URLs to `https://api.indexnow.org/indexnow` with that key.
 - AI crawler tokens are listed in `src/app/robots.ts`. Vendors rename them;
   confirm against the vendors' own documentation before editing the list.
 
