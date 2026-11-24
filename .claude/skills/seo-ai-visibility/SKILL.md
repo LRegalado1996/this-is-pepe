@@ -101,7 +101,6 @@ documentation again and update this section with what you find and the date.
 These move the needle more than any tag, and only Lucas can do them. Remind him
 when they are still pending:
 
-- Connect the real domain and set `NEXT_PUBLIC_SITE_URL`.
 - Verify the site in Google Search Console and Bing Webmaster Tools
   (`GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION`) and submit the sitemap.
 - Link to the site from LinkedIn, X, GitHub and the author bio of each article.

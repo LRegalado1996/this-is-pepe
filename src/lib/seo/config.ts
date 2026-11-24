@@ -15,9 +15,9 @@ import {
   type RouteKey,
 } from "@/lib/i18n/config";
 
-// Set NEXT_PUBLIC_SITE_URL (e.g. https://lucasregalado.com) in Vercel once the domain is connected.
+// The canonical domain. NEXT_PUBLIC_SITE_URL overrides it (e.g. for a staging host).
 export const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://this-is-pepe.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://lucasregalado.com"
 ).replace(/\/$/, "");
 
 export const author = {

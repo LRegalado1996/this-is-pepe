@@ -83,7 +83,7 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 All are optional and set in Vercel:
 
-- `NEXT_PUBLIC_SITE_URL` – the public URL (for example `https://lucasregalado.com`); used for canonical URLs, the sitemap and social cards
+- `NEXT_PUBLIC_SITE_URL` – overrides the public URL (defaults to `https://lucasregalado.com`); used for canonical URLs, the sitemap and social cards
 - `GOOGLE_SITE_VERIFICATION` – the verification token from Google Search Console
 - `BING_SITE_VERIFICATION` – the verification token from Bing Webmaster Tools (Bing's index also feeds ChatGPT search and Copilot)
 
